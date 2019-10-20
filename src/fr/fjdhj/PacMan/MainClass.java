@@ -1,6 +1,7 @@
 package fr.fjdhj.PacMan;
 
 import java.io.IOException;
+import java.net.URL;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -23,14 +24,14 @@ public class MainClass extends Application {
 		//Nom de la fenêtre
 		stagePrincipal.setTitle("PacMan");
 		
-		//Charge les fichiers FXML pour afficher le contenu
-		initMainMenu();
+		//Charge les fichiers FXML pour afficher le contenu, ici mainMenu
+		initScene(MainClass.class.getResource("view/MainMenu.fxml"));
 	}
 	
-	private void initMainMenu() {
+	private void initScene(URL path) {
 		//Charge le contenue du fichier FXML
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(MainClass.class.getResource("view/MainMenu.fxml"));
+		loader.setLocation(path);
 		try {
 			conteneurPrincipal = (AnchorPane) loader.load();
 			//Création scene principale
