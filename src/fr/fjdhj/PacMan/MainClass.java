@@ -1,9 +1,16 @@
 package fr.fjdhj.PacMan;
 
-public class MainClass {
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-	public MainClass() {
-		// TODO Auto-generated constructor stub
+public class MainClass extends Application {
+
+	@Override
+	public void start(Stage primaryStage) {
+		
 	}
 
+	public static void main(String[] args) {
+		launch(args);
+	}
 }
