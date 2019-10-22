@@ -1,6 +1,6 @@
 package fr.fjdhj.PacMan.view;
 
-import fr.fjdhj.PacMan.gameLogic.GameLogic;
+import fr.fjdhj.PacMan.gameLogic.GameCore;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -25,7 +25,7 @@ public class MainMenuMapping {
 	@FXML
 	public void playGame() {
 		//On charge notre partie
-		GameLogic game = new GameLogic();
+		GameCore game = new GameCore();
 		//Puis on la lance
 		game.startGame();
 
