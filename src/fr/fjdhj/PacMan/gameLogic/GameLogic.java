@@ -19,19 +19,24 @@ public class GameLogic extends Thread{
 	public void run() {
 		//Ici on teste si la partie est fini
 		 while(run) {
-			 try {
-				Thread.sleep(4);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			 //On avance de 10 -> soit une unité (meusure utilisé car les murs font 10 d'épaisseur et que PacMan fait 10 de rayon
+			for(int i = 0; i<10; i++) {
+				 try {
+					Thread.sleep(4);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				gameCore.getPlayer().moove();
 			}
-			gameCore.getPlayer().moove();
 		}
 	}
 	 
 	 
 	 
 	 private boolean canMoove() {
+
+		 
+		 
 		return false;
 	 }
 }
