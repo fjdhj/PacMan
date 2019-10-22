@@ -6,10 +6,9 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Bounds;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 public class PlayGameMapping{
@@ -19,8 +18,6 @@ public class PlayGameMapping{
 	 * PARTIE FXML
 	 * ----------------------------------------------
 	 */
-	@FXML
-	private Circle PacManEntity;
 	@FXML
 	private ImageView PacMan;
 	@FXML
@@ -32,21 +29,23 @@ public class PlayGameMapping{
 		
 	@FXML
 	public void initialize(){	
+		//Mets a PacMan (ImageView) notre image de PacMan
+		PacMan.setImage(new Image(PlayGameMapping.class.getResourceAsStream("ressource/PacMan.png")));
+		
 		//On créer un Timeline : pour déplacer le PacMan
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), new EventHandler<ActionEvent>() {
         	
             @Override
             public void handle(ActionEvent t) {
-            	//Déplace le PacMan
+            	//Déplace le PacMan graphiquement
             	PacMan.setLayoutX(player.getXPos());
             	PacMan.setLayoutY(player.getYPos());
-
-                Bounds bounds = pan.getBoundsInLocal();
-                
-                //Si le PacMan est bloquer l'arréter
-                //NOTE : les deux if qui suive se SERVE A RIEN, LES IGNORER
-                
-                //If the ball reaches the left or right border make the step negative
+            	
+            	//Si le PacMan est bloquer l'arréter
+            	//NOTE : les lignes qui suive ne SERVE A RIEN, LES IGNORER
+                /*Bounds bounds = pan.getBoundsInLocal();
+            	
+            	//If the ball reaches the left or right border make the step negative
                 if(PacManEntity.getLayoutX() <= (bounds.getMinX() + PacManEntity.getRadius()) || 
                 		PacManEntity.getLayoutX() >= (bounds.getMaxX() - PacManEntity.getRadius()) ){
 
@@ -58,11 +57,13 @@ public class PlayGameMapping{
                         (PacManEntity.getLayoutY() <= (bounds.getMinY() + PacManEntity.getRadius()))){
 
 
-                }
+                }*/
             }
         }));
         
+        //Cycle infinie, pour que le PacMan BOUGE sans fin
         timeline.setCycleCount(Timeline.INDEFINITE);
+        //Lancer l'animation
         timeline.play();
 	}
 
@@ -70,7 +71,7 @@ public class PlayGameMapping{
 	
 	
 	//Permé de fournir les entité : fantome et PacMan
-	//NOTE : les fantome
+	//NOTE : les fantomes seront a ajouter via cette fonction
 	public void setEntity(PacMan player) {
 		this.player = player; 
 	}
