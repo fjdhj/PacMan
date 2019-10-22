@@ -23,7 +23,6 @@ public class PlayGameMapping{
 	@FXML
 	public AnchorPane pan;
 	
-	
 	private PacMan player;
 	
 		
@@ -32,6 +31,14 @@ public class PlayGameMapping{
 		//Mets a PacMan (ImageView) notre image de PacMan
 		PacMan.setImage(new Image(PlayGameMapping.class.getResourceAsStream("ressource/PacMan.png")));
 		
+		//On aparcoure les objets notre AnchorPan pricipale
+		for(int i =0; i<pan.getChildren().size(); i++) {
+			//Si ce n'est pas PacMan
+			if(!pan.getChildren().get(i).equals(PacMan)) {
+				
+			}
+
+		}
 		//On créer un Timeline : pour déplacer le PacMan
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), new EventHandler<ActionEvent>() {
         	
@@ -40,6 +47,9 @@ public class PlayGameMapping{
             	//Déplace le PacMan graphiquement
             	PacMan.setLayoutX(player.getXPos());
             	PacMan.setLayoutY(player.getYPos());
+            	
+            	//Vérifie la rotation de PacMan
+            	PacMan.setRotate(player.getDirection().getRotate());
             	
             	//Si le PacMan est bloquer l'arréter
             	//NOTE : les lignes qui suive ne SERVE A RIEN, LES IGNORER
