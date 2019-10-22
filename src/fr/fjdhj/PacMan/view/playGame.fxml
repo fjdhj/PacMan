@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane fx:id="pan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.fjdhj.PacMan.view.PlayGameMapping">
+   <children>
+      <Circle fx:id="PacManEntity" fill="DODGERBLUE" layoutX="127.0" layoutY="502.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+      <ImageView fx:id="PacMan" fitHeight="30.0" fitWidth="30.0" layoutX="158.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../972px-Pacman.svg.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
