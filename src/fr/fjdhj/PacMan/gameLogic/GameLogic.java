@@ -81,6 +81,7 @@ public class GameLogic {
 			@Override
 			public void run() {
 				for(int i = 0; i< 100; i++) {
+					//Modifie les coordonées de PacMan
 					player.moove();
 					try {  
 						Thread.sleep(4);
