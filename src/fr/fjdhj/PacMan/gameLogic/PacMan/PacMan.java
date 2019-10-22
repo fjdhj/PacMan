@@ -62,11 +62,11 @@ public class PacMan {
 	public void moove() {
 		switch(direction){
 			case RIGHT:
-				xPos--;
+				xPos++;
 				break;
 			
 			case LEFT:
-				xPos++;
+				xPos--;
 				break;
 				
 			case UP:
