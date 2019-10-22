@@ -1,8 +1,8 @@
 package fr.fjdhj.PacMan.gameLogic;
 
 public enum Direction{
-    UP    ("up", 90), 
-    DOWN  ("down", 270), 
+    UP    ("up", 270), 
+    DOWN  ("down", 90), 
     LEFT  ("left", 180), 
     RIGHT ("right", 0);
 	
