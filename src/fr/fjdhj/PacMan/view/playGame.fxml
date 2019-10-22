@@ -15,11 +15,11 @@
             <Circle layoutX="10.0" layoutY="10.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="169.0" layoutY="160.0" prefHeight="10.0" prefWidth="70.0" rotate="90.0">
+      <AnchorPane layoutX="194.0" layoutY="145.0" prefHeight="70.0" prefWidth="10.0">
          <children>
-            <Circle layoutX="60.0" layoutY="10.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="10.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
-            <Circle layoutX="10.0" layoutY="10.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+            <Circle layoutX="10.0" layoutY="8.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle layoutX="10.0" layoutY="60.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </AnchorPane>
    </children>
