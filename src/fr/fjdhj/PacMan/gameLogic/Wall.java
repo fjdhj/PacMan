@@ -1,6 +1,5 @@
 package fr.fjdhj.PacMan.gameLogic;
 
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 
 /**
