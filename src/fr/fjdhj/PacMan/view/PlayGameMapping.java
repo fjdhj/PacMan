@@ -23,6 +23,10 @@ public class PlayGameMapping{
 	 * ----------------------------------------------
 	 */
 	
+	/*
+	 * NOTE : Pour la creation d'un stage, le couloir doit faire 28 pixel de large
+	 */
+	
 	//  ATTENTION AU COORDONEES DE L'IMAGE VIEW
 	
 	// Limage view :
