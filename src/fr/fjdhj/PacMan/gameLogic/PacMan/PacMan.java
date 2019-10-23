@@ -249,7 +249,6 @@ public class PacMan {
 	public boolean canTurn(List<Wall> ListWall) {
 		int alpha = 0;
 		boolean horizon = false;
-		System.out.println(newDirection.get());
 		switch(newDirection.get()) {
 		case LEFT:
 			alpha = -15;
@@ -267,45 +266,23 @@ public class PacMan {
 			break;
 		}
 		
-		if(horizon) {
-			
+		if(horizon) {	
 			for(Wall wall : ListWall) {	
-				/*if(wall.getXmin()<=(xPos.get()+alpha) && (xPos.get()+alpha)<=wall.getXmax()) {
-					System.out.println("BLOKI1");
-				}
-				if(wall.getYmin()<=(yPos.get()-12) && (yPos.get()-12)<=wall.getYmax()){
-					System.out.println("BLOKI2");
-				}
-				if((wall.getYmin()<=(yPos.get()+12) && (yPos.get()+12)<=wall.getYmax())) {
-					System.out.println("BLOKI3");
-				}*/
-				System.out.println("X : " + xPos.get() + "; Y : " + yPos.get());
 				if(wall.getXmin()<=(xPos.get()+alpha) && (xPos.get()+alpha)<=wall.getXmax() && 
 				  ((wall.getYmin()<=(yPos.get()-12) && (yPos.get()-12)<=wall.getYmax()) ||
 				  (wall.getYmin()<=(yPos.get()+12) && (yPos.get()+12)<=wall.getYmax()))) {
-					System.out.println("X pas bon");
 					return false;
 				}
 			}
 		}else {
 			for(Wall wall : ListWall) {	
-				/*if(wall.getXmin()<=(yPos.get()+alpha) && (yPos.get()+alpha)<=wall.getXmax()) {
-					System.out.println("BLOKI1P");
-				}
-				if(((wall.getXmin()<=(xPos.get()-12) && (xPos.get()-12)<=wall.getXmax()) ||
-				(wall.getXmin()<=(xPos.get()+12) && (xPos.get()+12)<=wall.getXmax()))){
-					System.out.println("BLOKI2P");
-				}*/
-				System.out.println("X : " + xPos.get() + "; Y : " + yPos.get());
 				if(wall.getYmin()<=(yPos.get()+alpha) && (yPos.get()+alpha)<=wall.getYmax() && 
 				  ((wall.getXmin()<=(xPos.get()-12) && (xPos.get()-12)<=wall.getXmax()) ||
 				  (wall.getXmin()<=(xPos.get()+12) && (xPos.get()+12)<=wall.getXmax()))) {
-					System.out.println("Y pas bon");
 					return false;
 				}
 			}
 		}
-		System.out.println("Peut tourner");
 		setDirection(newDirection.get());
 		this.newDirection.set(null);
 		return true;
