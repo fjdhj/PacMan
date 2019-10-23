@@ -1,19 +1,19 @@
 package fr.fjdhj.PacMan.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.fjdhj.PacMan.gameLogic.Direction;
+import fr.fjdhj.PacMan.gameLogic.Wall;
 import fr.fjdhj.PacMan.gameLogic.PacMan.PacMan;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.RotateEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
+import javafx.scene.shape.Rectangle;
 
 public class PlayGameMapping{
 	
@@ -46,67 +46,41 @@ public class PlayGameMapping{
 	public AnchorPane pan;
 	
 	private PacMan player;
+	private List<Wall> wall = new ArrayList<Wall>();
 	
 		
 	@FXML
 	public void initialize(){	
 		//Mets a PacMan (ImageView) notre image de PacMan
 		PacMan.setImage(new Image(PlayGameMapping.class.getResourceAsStream("ressource/PacMan.png")));
-		
-		//On aparcoure les objets notre AnchorPan pricipale
-		for(int i =0; i<pan.getChildren().size(); i++) {
-			//Si ce n'est pas PacMan
-			if(!pan.getChildren().get(i).equals(PacMan)) {
-				
-			}
-
-		}
-		
-		/*//On créer un Timeline : pour déplacer le PacMan
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), new EventHandler<ActionEvent>() {
-        	
-            @Override
-            public void handle(ActionEvent t) {
-            	//Déplace le PacMan graphiquement
-            	PacMan.setLayoutX(player.getXPos());
-            	PacMan.setLayoutY(player.getYPos());
-            	
-            	//Vérifie la rotation de PacMan
-            	PacMan.setRotate(player.getDirection().getRotate());
-            	
-            	//Si le PacMan est bloquer l'arréter
-            	//NOTE : les lignes qui suive ne SERVE A RIEN, LES IGNORER
-                //Bounds bounds = pan.getBoundsInLocal();
-            	
-            	//If the ball reaches the left or right border make the step negative
-                if(PacManEntity.getLayoutX() <= (bounds.getMinX() + PacManEntity.getRadius()) || 
-                		PacManEntity.getLayoutX() >= (bounds.getMaxX() - PacManEntity.getRadius()) ){
-
-
-                }
-
-                //If the ball reaches the bottom or top border make the step negative
-                if((PacManEntity.getLayoutY() >= (bounds.getMaxY() - PacManEntity.getRadius())) || 
-                        (PacManEntity.getLayoutY() <= (bounds.getMinY() + PacManEntity.getRadius()))){
-
-
-                }//
-            }
-        }));
-        
-        //Cycle infinie, pour que le PacMan BOUGE sans fin
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        //Lancer l'animation
-        timeline.play();*/
 	}
 
 	public PlayGameMapping(){}
 	
 	
-	//Permé de fournir les entité : fantome et PacMan
+	/*
+	 * ---------------------------------------------------
+	 * Quelque fonctions utils
+	 * ---------------------------------------------------
+	 */
+	
+	//Permé de fournir les entité : fantome et PacMan et de récupérer les murs
 	//NOTE : les fantomes seront a ajouter via cette fonction
-	public void setEntity(PacMan player) {
+	public List<Wall> setEntityAndGetWall(PacMan player) {
 		this.player = player; 
+		
+		//Récupère les murs
+		Node w;
+		//On aparcoure les objets notre AnchorPan pricipale
+		for(int i =0; i<pan.getChildren().size(); i++) {
+			//Si c'est un AnchorPan -> donc un mur
+			if((w=pan.getChildren().get(i)) instanceof Rectangle) {
+				wall.add(new Wall((Rectangle) w));
+				System.out.println(w);
+			}
+
+		}
+		return wall;
 	}
 	
 	
@@ -147,6 +121,7 @@ public class PlayGameMapping{
 				//On met a jour l'affichage
 				
 			}});
+		
 		
 		
 	}

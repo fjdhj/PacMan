@@ -1,5 +1,7 @@
 package fr.fjdhj.PacMan.gameLogic;
 
+import java.util.List;
+
 import fr.fjdhj.PacMan.MainClass;
 import fr.fjdhj.PacMan.gameLogic.PacMan.PacMan;
 import fr.fjdhj.PacMan.view.MainMenuMapping;
@@ -58,7 +60,7 @@ public class GameCore {
 		setStartLife(0);
 		setStartPoint(0);
 		setStartDirection(Direction.LEFT);		
-		setPlayer(new PacMan(300,600,3,0, Direction.LEFT));
+		setPlayer(new PacMan(188,222,3,0, Direction.LEFT));
 	}
 	
 	/*
@@ -75,13 +77,13 @@ public class GameCore {
 		controlleur = (PlayGameMapping) MainClass.initScene(MainMenuMapping.class.getResource("playGame.fxml"));
 		//On innitialise notre KeyListeneur
 		initKeyListener();	
-		//On fournie a notre controlleur nos objet
-		controlleur.setEntity(player);
+		//On fournie a notre controlleur nos objet et on récupère les murs
+		List<Wall> wall = controlleur.setEntityAndGetWall(player);
 		//On ajoute nos listeneur pour l'interface graphique
 		controlleur.addListener();
 		
 		//On appel notre GameCore
-		GameLogic gameLogic = new GameLogic(gameCore);
+		GameLogic gameLogic = new GameLogic(gameCore, wall);
 		//On démare le Thread principale
 		gameLogic.start();
 		
@@ -108,16 +110,17 @@ public class GameCore {
 			public void handle(KeyEvent arg0) {
 				switch (arg0.getCode()) {
 				case LEFT:
-					player.setDirection(Direction.LEFT);
+					player.setNewDirection(Direction.LEFT);
 					break;
 				case RIGHT:
-					player.setDirection(Direction.RIGHT);
+					player.setNewDirection(Direction.RIGHT);
 					break;
 				case UP:
-					player.setDirection(Direction.UP);
+					player.setNewDirection(Direction.UP);
 					break;
 				case DOWN:
-					player.setDirection(Direction.DOWN);
+					player.setNewDirection(Direction.DOWN);
+					break;
 				}
 				
 			}});

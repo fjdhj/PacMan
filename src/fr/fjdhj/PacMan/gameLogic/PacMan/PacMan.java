@@ -1,5 +1,7 @@
 package fr.fjdhj.PacMan.gameLogic.PacMan;
 
+import java.util.List;
+
 import fr.fjdhj.PacMan.gameLogic.Direction;
 import fr.fjdhj.PacMan.gameLogic.Wall;
 import javafx.beans.property.DoubleProperty;
@@ -17,6 +19,7 @@ public class PacMan {
 	private IntegerProperty life = new SimpleIntegerProperty();    //<----> int
 	private DoubleProperty point = new SimpleDoubleProperty();     //<----> double
 	private ObjectProperty<Direction> direction = new SimpleObjectProperty<>(); //<----> Direction
+	private ObjectProperty<Direction> newDirection = new SimpleObjectProperty<>(); //<----> Une nouvelle direction 
 	
 	/*---------------------------------------------------------------------------
 	 * Constructeur
@@ -40,6 +43,7 @@ public class PacMan {
 		this.life.set(life);
 		this.point.set(point);
 		this.direction.set(direction);
+		this.newDirection.set(null);
 	}
 	
 	public PacMan() {
@@ -48,6 +52,7 @@ public class PacMan {
 		this.life.set(0);
 		this.point.set(0);
 		this.direction.set(Direction.LEFT);
+		this.newDirection.set(null);
 	}
 
 	
@@ -101,21 +106,210 @@ public class PacMan {
 	}
 	
 	
-	/**
-	 * Regarde si PacMan est dans le mur
-	 * @param wall : Le mur
-	 * @return  true si il est , autrement retourn false
+	/* On dit que PacMan est placée dans un carrée (il fait 28 de cotée : 24 pour la taille de PacMan + 4 de vide)
+	 * On utilise deux point A et B, placée au extrémité de la face qui avance
+	 * Et on regarde si les deux points sont dans le mur 
+	 * Si il se déplace latéralement : A(d,e) et B(d,f)
+	 * Si il se déplace verticalement : A(e,d) et B(f,d)
+	 * NOTE : dans une direction données (horizontale/verticale), quelque soit le sens, f et e sont identique mais d est different
 	 */
-	public Boolean isInWall(Wall wall) {
-		if(xPos.get() > wall.getXmin() && xPos.get() < wall.getXmin() && yPos.get() > wall.getYmin() && yPos.get() < wall.getYmax()) { //Si il va dans le mur
-			return true;
-		}else {
-			return false;
-		}
+	/**
+	 * Regarde si PacMan va dans le mur en fonction de la direction
+	 * @param wall : Le mur
+	 * @return  true si il est dedans, autrement retourn false
+	 */
+	public Boolean goInWall(Wall wall) {
+		int alpha = 0;
+		boolean horizon = false;
+		
+			switch(direction.get()) {
+			case LEFT:
+				alpha=-15;
+				horizon=true;
+				break;
+			case RIGHT:
+				alpha=15;
+				horizon=true;
+				break;
+			case UP:
+				alpha=-15;
+				horizon=false;
+				break;
+			case DOWN:
+				alpha=15;
+				horizon=false;
+				break;
+			}
+			//Si on se déplace horizontalement
+			if(horizon) {
+				/*  d = x+alpha
+				 *  e = y-14
+				 *  f = y+14
+				 */
+				if(wall.getXmin()<=(xPos.get()+alpha) && (xPos.get()+alpha)<=wall.getXmax() && //On test pour d
+				  ((wall.getYmin()<=(yPos.get()-14) && (yPos.get()-14)<=wall.getYmax()) || //On test pour e
+				  (wall.getYmin()<=(yPos.get()+14) && (yPos.get()+14)<=wall.getYmax()))){ //On test pour f
+					//Si toutes les condiotions son OK
+					return true;
+					
+				}
+				
+			//Si on se déplace verticalment
+			}else {
+				/*  d = y+alpha
+				 *  e = x-14
+				 *  f = x+14
+				 */
+				if(wall.getYmin()<=(yPos.get()+alpha) && (yPos.get()+alpha)<=wall.getYmax() && //On test pour d
+				  ((wall.getXmin()<=(xPos.get()-14) && (xPos.get()-14)<=wall.getXmax()) || //On test pour e
+				  (wall.getXmin()<=(xPos.get()+14) && (xPos.get()+14)<=wall.getXmax()))){ //On test pour f
+					//Si toutes les condiotions son OK
+					return true;
+					
+				}
+			}
+
+		return false;
+		
 	}
 	
 	
+	/* On dit que PacMan est placée dans un carrée (il fait 28 de cotée : 24 pour la taille de PacMan + 4 de vide)
+	 * On utilise deux point A et B, placée au extrémité de la face qui avance
+	 * Et on regarde si les deux points sont dans le mur 
+	 * Si il se déplace latéralement : A(d,e) et B(d,f)
+	 * Si il se déplace verticalement : A(e,d) et B(f,d)
+	 * NOTE : dans une direction données (horizontale/verticale), quelque soit le sens, f et e sont identique mais d est different
+	 */
+	/**
+	 * Regarde si PacMan va dans l'un des murs en fonction de la direction
+	 * @param wall : une list de mur
+	 * @return true si il est dedans, autrement retourn false
+	 */
+	public Boolean goInWall(List<Wall> ListWall) {
+		int alpha = 0;
+		boolean horizon = false;
+			switch(direction.get()) {
+			case LEFT:
+				alpha=-13;
+				horizon=true;
+				break;
+			case RIGHT:
+				alpha=13;
+				horizon=true;
+				break;
+			case UP:
+				alpha=-13;
+				break;
+			case DOWN:
+				alpha=13;
+				break;
+			}
+			//Si on se déplace horizontalement
+			if(horizon) {
+				for(Wall wall : ListWall) {	
+					/*  d = x+alpha
+					 *  e = y-14
+					 *  f = y+14
+					 */
+					if(wall.getXmin()<=(xPos.get()+alpha) && (xPos.get()+alpha)<=wall.getXmax() && //On test pour d
+					  ((wall.getYmin()<=(yPos.get()-12) && (yPos.get()-12)<=wall.getYmax()) || //On test pour e
+					  (wall.getYmin()<=(yPos.get()+12) && (yPos.get()+12)<=wall.getYmax()))){ //On test pour f
+						//Si toutes les condiotions son OK
+						return true;
+					}
+				}
+				
+			//Si on se déplace verticalment
+			}else {
+				for(Wall wall : ListWall) {	
+					/*  d = y+alpha
+					 *  e = x-14
+					 *  f = x+14
+					 */
+					if(wall.getYmin()<=(yPos.get()+alpha) && (yPos.get()+alpha)<=wall.getYmax() && //On test pour d
+					  ((wall.getXmin()<=(xPos.get()-12) && (xPos.get()-12)<=wall.getXmax()) || //On test pour e
+					  (wall.getXmin()<=(xPos.get()+12) && (xPos.get()+12)<=wall.getXmax()))){ //On test pour f
+						//Si toutes les condiotions son OK
+						return true;
+					}
+				}
+			}
+
+		return false;
+	}
 	
+	/**
+	 * Reagrde si PacMan peut tourner
+	 * Si oui, il change la direction de PacMan
+	 * @param ListWall : La liste des murs
+	 * @param newDirection : La nouvelle direction
+	 * @return : True si possible, False si non
+	 */
+	public boolean canTurn(List<Wall> ListWall) {
+		int alpha = 0;
+		boolean horizon = false;
+		System.out.println(newDirection.get());
+		switch(newDirection.get()) {
+		case LEFT:
+			alpha = -15;
+			horizon=true;
+			break;
+		case RIGHT:
+			alpha = 15;
+			horizon=true;
+			break;
+		case UP:
+			alpha = -15;
+			break;
+		case DOWN:
+			alpha = 15;
+			break;
+		}
+		
+		if(horizon) {
+			
+			for(Wall wall : ListWall) {	
+				/*if(wall.getXmin()<=(xPos.get()+alpha) && (xPos.get()+alpha)<=wall.getXmax()) {
+					System.out.println("BLOKI1");
+				}
+				if(wall.getYmin()<=(yPos.get()-12) && (yPos.get()-12)<=wall.getYmax()){
+					System.out.println("BLOKI2");
+				}
+				if((wall.getYmin()<=(yPos.get()+12) && (yPos.get()+12)<=wall.getYmax())) {
+					System.out.println("BLOKI3");
+				}*/
+				System.out.println("X : " + xPos.get() + "; Y : " + yPos.get());
+				if(wall.getXmin()<=(xPos.get()+alpha) && (xPos.get()+alpha)<=wall.getXmax() && 
+				  ((wall.getYmin()<=(yPos.get()-12) && (yPos.get()-12)<=wall.getYmax()) ||
+				  (wall.getYmin()<=(yPos.get()+12) && (yPos.get()+12)<=wall.getYmax()))) {
+					System.out.println("X pas bon");
+					return false;
+				}
+			}
+		}else {
+			for(Wall wall : ListWall) {	
+				/*if(wall.getXmin()<=(yPos.get()+alpha) && (yPos.get()+alpha)<=wall.getXmax()) {
+					System.out.println("BLOKI1P");
+				}
+				if(((wall.getXmin()<=(xPos.get()-12) && (xPos.get()-12)<=wall.getXmax()) ||
+				(wall.getXmin()<=(xPos.get()+12) && (xPos.get()+12)<=wall.getXmax()))){
+					System.out.println("BLOKI2P");
+				}*/
+				System.out.println("X : " + xPos.get() + "; Y : " + yPos.get());
+				if(wall.getYmin()<=(yPos.get()+alpha) && (yPos.get()+alpha)<=wall.getYmax() && 
+				  ((wall.getXmin()<=(xPos.get()-12) && (xPos.get()-12)<=wall.getXmax()) ||
+				  (wall.getXmin()<=(xPos.get()+12) && (xPos.get()+12)<=wall.getXmax()))) {
+					System.out.println("Y pas bon");
+					return false;
+				}
+			}
+		}
+		System.out.println("Peut tourner");
+		setDirection(newDirection.get());
+		this.newDirection.set(null);
+		return true;
+	}
 	
 	
 	/*
@@ -220,7 +414,7 @@ public class PacMan {
 	
 	/**
 	 * 
-	 * @param direction La nouvelle direction
+	 * @param direction La nouvelle direction (effet imediat)
 	 */
 	public void setDirection(ObjectProperty<Direction> direction) {
 		this.direction = direction;
@@ -228,10 +422,36 @@ public class PacMan {
 	
 	/**
 	 * 
-	 * @param direction La nouvelle direction
+	 * @param direction La nouvelle direction (effet imediat)
 	 */
 	public void setDirection(Direction direction) {
 		this.direction.set(direction);
+	}
+
+	/**
+	 * 
+	 * @return La nouvelle direction stocké
+	 */
+	public ObjectProperty<Direction> getNewDirection() {
+		return newDirection;
+	}
+
+	/**
+	 * 
+	 * @param newDirection La nouvelle direction (effet aprés canTurn())
+	 * @see canTurn(List<Wall> ListWall, Direction newDirection)
+	 */
+	public void setNewDirection(ObjectProperty<Direction> newDirection) {
+		this.newDirection = newDirection;
+	}
+	
+	/**
+	 * 
+	 * @param newDirection La nouvelle direction (effet aprés canTurn())
+	 * @see canTurn(List<Wall> ListWall, Direction newDirection)
+	 */
+	public void setNewDirection(Direction newDirection) {
+		this.newDirection.set(newDirection);
 	}
 	
 	

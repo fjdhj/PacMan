@@ -1,5 +1,6 @@
 package fr.fjdhj.PacMan.gameLogic;
 
+import java.util.List;
 
 /*
  *  Classe qui va gérer le jeu : avancement, si il y a un mur, un phantom,
@@ -9,35 +10,39 @@ package fr.fjdhj.PacMan.gameLogic;
 public class GameLogic extends Thread{
 
 	private GameCore gameCore;
+	private List<Wall> wall;
 	private boolean run = true;
-
-	public GameLogic(GameCore gameCore) {
+	
+	public GameLogic(GameCore gameCore, List<Wall> wall) {
 		this.gameCore = gameCore;
+		this.wall = wall;
 	}
 	
 	 @Override
 	public void run() {
 		//Ici on teste si la partie est fini
 		 while(run) {
-			 //On avance de 10 -> soit une unité (meusure utilisé car les murs font 10 d'épaisseur et que PacMan fait 10 de rayon
-			for(int i = 0; i<10; i++) {
-				 try {
-					Thread.sleep(4);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				gameCore.getPlayer().moove();
-			}
+			 try {
+				 Thread.sleep(4);
+			 } catch (InterruptedException e) {
+				 e.printStackTrace();
+			 }
+			 
+			 //On regarde si on a une nouvelle direction et si le joueur peut tourner
+			 if(gameCore.getPlayer().getNewDirection().get()!=null)	{
+				 gameCore.getPlayer().canTurn(wall);
+				 
+			 }
+			 
+			 //Si PacMan ne va pas dans le mur
+			 if(!gameCore.getPlayer().goInWall(wall)) {
+				 gameCore.getPlayer().moove();
+			 }else {
+				 System.out.println("Go in wall");
+			 }
+			
 		}
 	}
 	 
-	 
-	 
-	 private boolean canMoove() {
-
-		 
-		 
-		return false;
-	 }
 	 
 }

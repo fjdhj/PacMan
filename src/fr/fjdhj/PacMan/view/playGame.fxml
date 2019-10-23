@@ -2,25 +2,21 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 
 <AnchorPane fx:id="pan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.fjdhj.PacMan.view.PlayGameMapping">
    <children>
-      <ImageView fx:id="PacMan" fitHeight="20.0" fitWidth="20.0" layoutX="219.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true" />
-      <AnchorPane layoutX="194.0" layoutY="135.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="64.0">
-         <children>
-            <Circle layoutX="56.0" layoutY="8.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="16.0" layoutX="6.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
-            <Circle layoutX="8.0" layoutY="8.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="194.0" layoutY="135.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="64.0" prefWidth="16.0">
-         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutY="7.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="16.0" />
-            <Circle layoutX="8.0" layoutY="56.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <Circle layoutX="8.0" layoutY="8.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-         </children>
-      </AnchorPane>
+      <ImageView fx:id="PacMan" fitHeight="24.0" fitWidth="24.0" layoutX="188.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true" />
+      <Rectangle height="136.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+      <Rectangle height="10.0" layoutX="10.0" layoutY="126.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
+      <Rectangle height="56.0" layoutX="70.0" layoutY="136.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+      <Rectangle height="10.0" layoutY="192.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
+      <Rectangle height="10.0" layoutX="10.0" stroke="BLACK" strokeType="INSIDE" width="182.0" />
+      <Rectangle height="56.0" layoutX="192.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
+      <Rectangle height="10.0" layoutX="220.0" stroke="BLACK" strokeType="INSIDE" width="182.0" />
+      <Rectangle height="136.0" layoutX="402.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+      <Rectangle height="10.0" layoutX="332.0" layoutY="126.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
+      <Rectangle height="28.0" layoutX="38.0" layoutY="38.0" stroke="BLACK" strokeType="INSIDE" width="42.0" />
+      <Rectangle height="28.0" layoutX="108.0" layoutY="38.0" stroke="BLACK" strokeType="INSIDE" width="56.0" />
    </children>
 </AnchorPane>

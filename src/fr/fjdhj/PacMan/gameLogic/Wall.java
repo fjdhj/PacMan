@@ -1,6 +1,7 @@
 package fr.fjdhj.PacMan.gameLogic;
 
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 
 /**
  * 
@@ -12,7 +13,7 @@ public class Wall {
 	private double Xmax;
 	private double Ymin;
 	private double Ymax;
-	private AnchorPane wall;
+	private Rectangle wall;
 	
 	
 	/**
@@ -20,12 +21,12 @@ public class Wall {
 	 * Va calculer automatiquement les coordonées Maximumes et minimumes
 	 * @param pane : L'AnchorPane utilisés pour faire le mur
 	 */
-	public Wall(AnchorPane wall) {
+	public Wall(Rectangle wall) {
 		setWall(wall);
 		setXmin(wall.getLayoutX());
 		setYmin(wall.getLayoutY());
-		setXmax(wall.getLayoutX() + wall.getMaxWidth());
-		setYmax(wall.getLayoutY() + wall.getMaxHeight());
+		setXmax(wall.getLayoutX() + wall.getWidth());
+		setYmax(wall.getLayoutY() + wall.getHeight());
 	}
 	
 	/**
@@ -57,7 +58,7 @@ public class Wall {
 	public double getYmax() {return Ymax;}
 	public void setYmax(double ymax) {Ymax = ymax;}
 
-	public AnchorPane getWall() {return wall;}
-	public void setWall(AnchorPane wall) {this.wall = wall;}
+	public Rectangle getWall() {return wall;}
+	public void setWall(Rectangle wall) {this.wall = wall;}
 
 }
