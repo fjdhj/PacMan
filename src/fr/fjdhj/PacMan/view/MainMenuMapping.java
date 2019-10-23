@@ -13,6 +13,8 @@ public class MainMenuMapping {
 	@FXML
 	private Button exitButton;
 	
+	private GameCore game;
+	
 	public MainMenuMapping() {}
 	
 	@FXML
@@ -25,7 +27,7 @@ public class MainMenuMapping {
 	@FXML
 	public void playGame() {
 		//On charge notre partie
-		GameCore game = new GameCore();
+		game = new GameCore();
 		//Puis on la lance
 		game.startGame();
 
@@ -44,6 +46,7 @@ public class MainMenuMapping {
 	 */
 	@FXML
 	public void exit(){
+		game.stopGame();
 		System.exit(0);
 	}
 }

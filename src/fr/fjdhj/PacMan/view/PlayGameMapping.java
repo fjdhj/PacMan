@@ -1,13 +1,17 @@
 package fr.fjdhj.PacMan.view;
 
+import fr.fjdhj.PacMan.gameLogic.Direction;
 import fr.fjdhj.PacMan.gameLogic.PacMan.PacMan;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.RotateEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
@@ -18,8 +22,26 @@ public class PlayGameMapping{
 	 * PARTIE FXML
 	 * ----------------------------------------------
 	 */
+	
+	//  ATTENTION AU COORDONEES DE L'IMAGE VIEW
+	
+	// Limage view :
+	//		  M(x,y)
+	//			x--------
+	//			|   M'  |
+	//			|	x	|
+	//			|		|
+	//			---------
+	//
+	// x et y sont les coordonées de l'image view. Or on veut qu'elle point au centre de celle ci
+	// x' et y' sont les coordonées de M' : x' = x+12
+	//								        y' = y+12				
+	//
+	
 	@FXML
 	private ImageView PacMan;
+	
+	
 	@FXML
 	public AnchorPane pan;
 	
@@ -39,7 +61,8 @@ public class PlayGameMapping{
 			}
 
 		}
-		//On créer un Timeline : pour déplacer le PacMan
+		
+		/*//On créer un Timeline : pour déplacer le PacMan
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), new EventHandler<ActionEvent>() {
         	
             @Override
@@ -53,7 +76,7 @@ public class PlayGameMapping{
             	
             	//Si le PacMan est bloquer l'arréter
             	//NOTE : les lignes qui suive ne SERVE A RIEN, LES IGNORER
-                /*Bounds bounds = pan.getBoundsInLocal();
+                //Bounds bounds = pan.getBoundsInLocal();
             	
             	//If the ball reaches the left or right border make the step negative
                 if(PacManEntity.getLayoutX() <= (bounds.getMinX() + PacManEntity.getRadius()) || 
@@ -67,14 +90,14 @@ public class PlayGameMapping{
                         (PacManEntity.getLayoutY() <= (bounds.getMinY() + PacManEntity.getRadius()))){
 
 
-                }*/
+                }//
             }
         }));
         
         //Cycle infinie, pour que le PacMan BOUGE sans fin
         timeline.setCycleCount(Timeline.INDEFINITE);
         //Lancer l'animation
-        timeline.play();
+        timeline.play();*/
 	}
 
 	public PlayGameMapping(){}
@@ -86,6 +109,46 @@ public class PlayGameMapping{
 		this.player = player; 
 	}
 	
-
+	
+	public void addListener() {
+		//On écoute la direction de PacMan et si elle change :
+		player.getDirection().addListener(new ChangeListener<Direction>(){
+			@Override
+			public void changed(ObservableValue<? extends Direction> arg0, Direction oldValue, Direction newValue) {
+				//On mets a jour la rotation
+				PacMan.setRotate(newValue.getRotate());				
+			}});
+		
+		//On écoute les coordoonées Y de PacMan et si elles changent :
+		player.getYPos().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				//On mets a jour la position Y
+				//NOTE : l'explication du -12 se trouve en haut
+				PacMan.setLayoutY(((double) newValue) - 12);
+				
+			}});
+		
+		//On écoute les coordoonées X de PacMan et si elles changent :
+		player.getXPos().addListener(new ChangeListener<Number>() {
+			
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				//On mets a jour la position X
+				//NOTE : l'explication du -12 se trouve en haut
+				PacMan.setLayoutX(((double) newValue) - 12);
+				
+			}});
+		
+		//On écoute le nombre de vie restante a PacMan et si elle change
+		player.getLife().addListener(new ChangeListener<Number>(){
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				//On met a jour l'affichage
+				
+			}});
+		
+		
+	}
 	
 }

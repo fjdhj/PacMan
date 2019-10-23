@@ -43,21 +43,6 @@ public class Wall {
 		setYmax(Ymax);
 		setWall(null);
 	}
-
-	
-	/**
-	 * Regarde si les coordonées sont dans le mur
-	 * @param x : Les coordonées x 
-	 * @param y : Les coordonées y
-	 * @return true si il est dedans, autrement retourn false
-	 */
-	public Boolean isInTheWall(int x, int y) {
-		if(x > Xmin && x < Xmin && y > Ymin && y < Ymax) { //Si il va dans le mur
-			return true;
-		}else {
-			return false;
-		}
-	}
 	
 	
 	public double getXmin() {return Xmin;}

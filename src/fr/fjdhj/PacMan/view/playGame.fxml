@@ -7,19 +7,19 @@
 
 <AnchorPane fx:id="pan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.fjdhj.PacMan.view.PlayGameMapping">
    <children>
-      <ImageView fx:id="PacMan" fitHeight="20.0" fitWidth="20.0" layoutX="161.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true" />
-      <AnchorPane layoutX="194.0" layoutY="135.0" prefHeight="10.0" prefWidth="70.0">
+      <ImageView fx:id="PacMan" fitHeight="20.0" fitWidth="20.0" layoutX="219.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true" />
+      <AnchorPane layoutX="194.0" layoutY="135.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="64.0">
          <children>
-            <Circle layoutX="60.0" layoutY="10.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="10.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
-            <Circle layoutX="10.0" layoutY="10.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle layoutX="56.0" layoutY="8.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="16.0" layoutX="6.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
+            <Circle layoutX="8.0" layoutY="8.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="194.0" layoutY="145.0" prefHeight="70.0" prefWidth="10.0">
+      <AnchorPane layoutX="194.0" layoutY="135.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="64.0" prefWidth="16.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-            <Circle layoutX="10.0" layoutY="8.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle layoutX="10.0" layoutY="60.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutY="7.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="16.0" />
+            <Circle layoutX="8.0" layoutY="56.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Circle layoutX="8.0" layoutY="8.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
          </children>
       </AnchorPane>
    </children>

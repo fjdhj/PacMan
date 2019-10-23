@@ -1,19 +1,22 @@
 package fr.fjdhj.PacMan.gameLogic.PacMan;
 
 import fr.fjdhj.PacMan.gameLogic.Direction;
+import fr.fjdhj.PacMan.gameLogic.Wall;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 
 public class PacMan {
 	
-	/**
-	 * La posiotion x du PacMan. Elle peut être modifié
-	 * @see PacMan#getXPos()
-	 * @see PacMan#setXPos(int)
-	 */
-	private int xPos;
-	private int yPos;
-	private int life;
-	private int point;
-	private Direction direction;
+
+	private DoubleProperty xPos = new SimpleDoubleProperty();      //<----> double
+	private DoubleProperty yPos = new SimpleDoubleProperty();      //<----> double
+	private IntegerProperty life = new SimpleIntegerProperty();    //<----> int
+	private DoubleProperty point = new SimpleDoubleProperty();     //<----> double
+	private ObjectProperty<Direction> direction = new SimpleObjectProperty<>(); //<----> Direction
 	
 	/*---------------------------------------------------------------------------
 	 * Constructeur
@@ -31,20 +34,20 @@ public class PacMan {
 	 * 
 	 */
 	
-	public PacMan(int xPos, int yPos, int life, int point, Direction direction) {
-		setXPos(xPos);
-		setYPos(yPos);
-		setLife(life);
-		setPoint(point);
-		setDirection(direction);
+	public PacMan(double xPos, double yPos, int life, double point, Direction direction) {
+		this.xPos.set(xPos);
+		this.yPos.set(yPos);
+		this.life.set(life);
+		this.point.set(point);
+		this.direction.set(direction);
 	}
 	
 	public PacMan() {
-		setXPos(0);
-		setYPos(0);
-		setLife(0);
-		setPoint(0);
-		setDirection(Direction.LEFT);
+		this.xPos.set(0);
+		this.yPos.set(0);
+		this.life.set(0);
+		this.point.set(0);
+		this.direction.set(Direction.LEFT);
 	}
 
 	
@@ -60,21 +63,21 @@ public class PacMan {
 	 */
 	
 	public void moove() {
-		switch(direction){
+		switch(direction.get()){
 			case RIGHT:
-				xPos++;
+				xPos.set(xPos.get() + 1);
 				break;
 			
 			case LEFT:
-				xPos--;
+				xPos.set(xPos.get() - 1);
 				break;
 				
 			case UP:
-				yPos--;
+				yPos.set(yPos.get() - 1);
 				break;
 				
 			case DOWN:
-				yPos++;
+				yPos.set(yPos.getValue() + 1);
 				break;
 		}	
 	}
@@ -85,7 +88,7 @@ public class PacMan {
 	 * @param nbr : quantité à ajouter/retirer
 	 */
 	public void changeLife(int nbr) {
-		life = life + nbr;
+		life.add(nbr);
 	}
 	
 	/**
@@ -94,8 +97,23 @@ public class PacMan {
 	 * @param nbr : Nombre de point à ajouter
 	 */
 	public void addPoint(int nbr) {
-		point=point+nbr;
+		point.add(nbr);
 	}
+	
+	
+	/**
+	 * Regarde si PacMan est dans le mur
+	 * @param wall : Le mur
+	 * @return  true si il est , autrement retourn false
+	 */
+	public Boolean isInWall(Wall wall) {
+		if(xPos.get() > wall.getXmin() && xPos.get() < wall.getXmin() && yPos.get() > wall.getYmin() && yPos.get() < wall.getYmax()) { //Si il va dans le mur
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 	
 	
 	
@@ -110,64 +128,93 @@ public class PacMan {
 	/**
 	 * @return La position x du PacMan
 	 */
-	public int getXPos() {
+	public DoubleProperty getXPos() {
 		return xPos;
 	}
 
 	/**
 	 * @param xPos La nouvelle position x du PacMan
 	 */
-	public void setXPos(int xPos) {
+	public void setXPos(DoubleProperty xPos) {
 		this.xPos = xPos;
+	}
+	
+	/**
+	 * @param xPos La nouvelle position x du PacMan
+	 */
+	public void setXPos(double xPos) {
+		this.xPos.set(xPos);
 	}
 
 	/**
 	 * @return La position y du PacMan
 	 */
-	public int getYPos() {
+	public DoubleProperty getYPos() {
 		return yPos;
 	}
 
 	/**
 	 * @param yPos La nouvelle position y du PacMan
 	 */
-	public void setYPos(int yPos) {
+	public void setYPos(DoubleProperty yPos) {
 		this.yPos = yPos;
 	}
 
 	/**
+	 * @param yPos La nouvelle position y du PacMan
+	 */
+	public void setYPos(double yPos) {
+		this.yPos.set(yPos);
+	}
+
+	
+	/**
 	 * @return Recupere le nombre de point
 	 */
-	public int getPoint() {
+	public DoubleProperty getPoint() {
 		return point;
 	}
 
 	/**
 	 * @param point le nouveau nombre de point point
 	 */
-	public void setPoint(int point) {
+	public void setPoint(DoubleProperty point) {
 		this.point = point;
 	}
 
 	/**
+	 * @param point le nouveau nombre de point point
+	 */
+	public void setPoint(double point) {
+		this.point.set(point);
+	}
+	
+	/**
 	 * @return Le nombre de vie restante
 	 */
-	public int getLife() {
+	public IntegerProperty getLife() {
 		return life;
 	}
 
 	/**
 	 * @param life Le nouveau nombre de vie
 	 */
-	public void setLife(int life) {
+	public void setLife(IntegerProperty life) {
 		this.life = life;
+	}
+	
+	/**
+	 * @param life Le nouveau nombre de vie
+	 */
+	public void setLife(int life) {
+		this.life.set(life);;
 	}
 	
 	/**
 	 * 
 	 * @return La direction actuel
 	 */
-	public Direction getDirection() {
+	public ObjectProperty<Direction> getDirection() {
 		return direction;
 	}
 	
@@ -175,8 +222,16 @@ public class PacMan {
 	 * 
 	 * @param direction La nouvelle direction
 	 */
-	public void setDirection(Direction direction) {
+	public void setDirection(ObjectProperty<Direction> direction) {
 		this.direction = direction;
+	}
+	
+	/**
+	 * 
+	 * @param direction La nouvelle direction
+	 */
+	public void setDirection(Direction direction) {
+		this.direction.set(direction);
 	}
 	
 	

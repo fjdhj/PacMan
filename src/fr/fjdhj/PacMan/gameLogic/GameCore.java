@@ -21,6 +21,7 @@ public class GameCore {
 	
 	//Note : pour pouvoir y accéder depuis notre Thread dans la fonction startGame()
 	private GameCore gameCore = this;
+	private GameLogic gameLogic;
 	
 	/*
 	 * -----------------------------------------------------------------------
@@ -76,16 +77,23 @@ public class GameCore {
 		initKeyListener();	
 		//On fournie a notre controlleur nos objet
 		controlleur.setEntity(player);
+		//On ajoute nos listeneur pour l'interface graphique
+		controlleur.addListener();
 		
 		//On appel notre GameCore
-		GameLogic gamecore = new GameLogic(gameCore);
+		GameLogic gameLogic = new GameLogic(gameCore);
 		//On démare le Thread principale
-		gamecore.start();
+		gameLogic.start();
 		
 
 	}
 	
-	
+	/**
+	 * Arrete la pertie
+	 */
+	public void stopGame() {
+		gameLogic.interrupt();
+	}
 	
 	/*
 	 * --------------------------------------------------------------------------
@@ -94,7 +102,7 @@ public class GameCore {
 	 */
 	
 	private void initKeyListener() {
-		//On créer un lsiteneur qui va écouter notre clavier
+		//On créer un listeneur qui va écouter notre clavier
 		controlleur.pan.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@SuppressWarnings("incomplete-switch")
 			public void handle(KeyEvent arg0) {
