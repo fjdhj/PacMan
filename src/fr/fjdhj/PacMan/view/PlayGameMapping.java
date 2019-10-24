@@ -10,13 +10,15 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
-public class PlayGameMapping{
+public class PlayGameMapping {
 	
 	/*
 	 * ----------------------------------------------
@@ -45,22 +47,28 @@ public class PlayGameMapping{
 	
 	@FXML
 	private ImageView PacMan;
-	
-	
 	@FXML
 	public AnchorPane pan;
+	@FXML
+	private AnchorPane pointPane;
+	@FXML
+	private Label point;
 	
 	private PacMan player;
 	private List<Wall> wall = new ArrayList<Wall>();
+	private List<Circle> pointCoords = new ArrayList<Circle>();
 	
 		
 	@FXML
 	public void initialize(){	
 		//Mets a PacMan (ImageView) notre image de PacMan
 		PacMan.setImage(new Image(PlayGameMapping.class.getResourceAsStream("ressource/PacMan.png")));
+		PacMan.setRotate(180);
+		point.setText("0");
 	}
 
-	public PlayGameMapping(){}
+
+	public PlayGameMapping() {}
 	
 	
 	/*
@@ -90,6 +98,12 @@ public class PlayGameMapping{
 				}
 			}
 		}
+		for(int i = 0; i<pointPane.getChildren().size(); i++) {
+			pointCoords.add((Circle) pointPane.getChildren().get(i));
+			
+				
+		}
+		
 		return wall;
 	}
 	
@@ -131,6 +145,18 @@ public class PlayGameMapping{
 				//On met a jour l'affichage
 				
 			}});
+		//On écoute le nombre de point et si il change
+		player.getPoint().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
+				//On met a jour l'affichage
+				point.setText(arg2.toString());
+				
+			}
+			
+		});
+		
+		
 		
 		
 		
@@ -139,5 +165,10 @@ public class PlayGameMapping{
 	public ImageView getImageViewPlayer() {
 		return PacMan;
 	}
+
+	public List<Circle> getPointCoords() {
+		return pointCoords;
+	}
+
 	
 }

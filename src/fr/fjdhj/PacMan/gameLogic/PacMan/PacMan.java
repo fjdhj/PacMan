@@ -93,7 +93,7 @@ public class PacMan {
 	 * @param nbr : quantité à ajouter/retirer
 	 */
 	public void changeLife(int nbr) {
-		life.add(nbr);
+		life.set(life.get()+nbr);
 	}
 	
 	/**
@@ -102,7 +102,7 @@ public class PacMan {
 	 * @param nbr : Nombre de point à ajouter
 	 */
 	public void addPoint(int nbr) {
-		point.add(nbr);
+		point.set(point.get() +nbr);
 	}
 	
 	
@@ -124,19 +124,19 @@ public class PacMan {
 		
 			switch(direction.get()) {
 			case LEFT:
-				alpha=-13;
+				alpha=-14;
 				horizon=true;
 				break;
 			case RIGHT:
-				alpha=13;
+				alpha=14;
 				horizon=true;
 				break;
 			case UP:
-				alpha=-13;
+				alpha=-14;
 				horizon=false;
 				break;
 			case DOWN:
-				alpha=13;
+				alpha=14;
 				horizon=false;
 				break;
 			}
@@ -148,8 +148,8 @@ public class PacMan {
 				 *  g = y
 				 */
 				if(wall.getXmin()<=(xPos.get()+alpha) && (xPos.get()+alpha)<=wall.getXmax() && //On test pour d
-				  ((wall.getYmin()<=(yPos.get()-12) && (yPos.get()-12)<=wall.getYmax()) || //On test pour e
-				  (wall.getYmin()<=(yPos.get()+12) && (yPos.get()+12)<=wall.getYmax()) ||
+				  ((wall.getYmin()<=(yPos.get()-13) && (yPos.get()-13)<=wall.getYmax()) || //On test pour e
+				  (wall.getYmin()<=(yPos.get()+13) && (yPos.get()+13)<=wall.getYmax()) ||
 				  (wall.getYmin()<=yPos.get() && yPos.get()<=wall.getYmax()))){ //On test pour f
 						//Si toutes les condiotions son OK
 						return true;
@@ -163,8 +163,8 @@ public class PacMan {
 				 *  g = x
 				 */
 				if(wall.getYmin()<=(yPos.get()+alpha) && (yPos.get()+alpha)<=wall.getYmax() && //On test pour d
-				  ((wall.getXmin()<=(xPos.get()-12) && (xPos.get()-12)<=wall.getXmax()) || //On test pour e
-				  (wall.getXmin()<=(xPos.get()+12) && (xPos.get()+12)<=wall.getXmax()) ||
+				  ((wall.getXmin()<=(xPos.get()-13) && (xPos.get()-13)<=wall.getXmax()) || //On test pour e
+				  (wall.getXmin()<=(xPos.get()+13) && (xPos.get()+13)<=wall.getXmax()) ||
 				  (wall.getXmin()<= xPos.get() && xPos.get()<=wall.getXmax()))){ //On test pour f
 						//Si toutes les condiotions son OK
 						return true;
@@ -193,18 +193,18 @@ public class PacMan {
 		boolean horizon = false;
 			switch(direction.get()) {
 			case LEFT:
-				alpha=-13;
+				alpha=-14;
 				horizon=true;
 				break;
 			case RIGHT:
-				alpha=13;
+				alpha=14;
 				horizon=true;
 				break;
 			case UP:
-				alpha=-13;
+				alpha=-14;
 				break;
 			case DOWN:
-				alpha=13;
+				alpha=14;
 				break;
 			}
 			//Si on se déplace horizontalement
@@ -215,8 +215,8 @@ public class PacMan {
 					 *  f = y+12
 					 */
 					if(wall.getXmin()<=(xPos.get()+alpha) && (xPos.get()+alpha)<=wall.getXmax() && //On test pour d
-					  ((wall.getYmin()<=(yPos.get()-12) && (yPos.get()-12)<=wall.getYmax()) || //On test pour e
-					  (wall.getYmin()<=(yPos.get()+12) && (yPos.get()+12)<=wall.getYmax()) ||
+					  ((wall.getYmin()<=(yPos.get()-13) && (yPos.get()-13)<=wall.getYmax()) || //On test pour e
+					  (wall.getYmin()<=(yPos.get()+13) && (yPos.get()+13)<=wall.getYmax()) ||
 					  (wall.getYmin()<=yPos.get() && yPos.get()<=wall.getYmax()))){ //On test pour f
 						//Si toutes les condiotions son OK
 						return true;
@@ -231,8 +231,8 @@ public class PacMan {
 					 *  f = x+12
 					 */
 					if(wall.getYmin()<=(yPos.get()+alpha) && (yPos.get()+alpha)<=wall.getYmax() && //On test pour d
-					  ((wall.getXmin()<=(xPos.get()-12) && (xPos.get()-12)<=wall.getXmax()) || //On test pour e
-					  (wall.getXmin()<=(xPos.get()+12) && (xPos.get()+12)<=wall.getXmax()) ||
+					  ((wall.getXmin()<=(xPos.get()-13) && (xPos.get()-13)<=wall.getXmax()) || //On test pour e
+					  (wall.getXmin()<=(xPos.get()+13) && (xPos.get()+13)<=wall.getXmax()) ||
 					  (wall.getXmin()<= xPos.get() && xPos.get()<=wall.getXmax()))){ //On test pour f
 						//Si toutes les condiotions son OK
 						return true;
@@ -273,8 +273,8 @@ public class PacMan {
 		if(horizon) {	
 			for(Wall wall : ListWall) {	
 				if(wall.getXmin()<=(xPos.get()+alpha) && (xPos.get()+alpha)<=wall.getXmax() && 
-				  ((wall.getYmin()<=(yPos.get()-12) && (yPos.get()-12)<=wall.getYmax()) ||
-				  (wall.getYmin()<=(yPos.get()+12) && (yPos.get()+12)<=wall.getYmax()) ||
+				  ((wall.getYmin()<=(yPos.get()-13) && (yPos.get()-13)<=wall.getYmax()) ||
+				  (wall.getYmin()<=(yPos.get()+13) && (yPos.get()+13)<=wall.getYmax()) ||
 				  (wall.getYmin()<=yPos.get() && yPos.get()<= wall.getYmax()))) {
 					return false;
 				}
@@ -282,8 +282,8 @@ public class PacMan {
 		}else {
 			for(Wall wall : ListWall) {	
 				if(wall.getYmin()<=(yPos.get()+alpha) && (yPos.get()+alpha)<=wall.getYmax() && 
-				  ((wall.getXmin()<=(xPos.get()-12) && (xPos.get()-12)<=wall.getXmax()) ||
-				  (wall.getXmin()<=(xPos.get()+12) && (xPos.get()+12)<=wall.getXmax()) ||
+				  ((wall.getXmin()<=(xPos.get()-13) && (xPos.get()-13)<=wall.getXmax()) ||
+				  (wall.getXmin()<=(xPos.get()+13) && (xPos.get()+13)<=wall.getXmax()) ||
 				  (wall.getXmin()<=xPos.get() && xPos.get()<=wall.getXmax()))) {
 					return false;
 				}

@@ -6,6 +6,7 @@ import fr.fjdhj.PacMan.MainClass;
 import fr.fjdhj.PacMan.gameLogic.PacMan.PacMan;
 import fr.fjdhj.PacMan.view.MainMenuMapping;
 import fr.fjdhj.PacMan.view.PlayGameMapping;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 
@@ -16,7 +17,7 @@ public class GameCore {
 	private int startLife;
 	private Direction startDirection;
 	private PacMan player;
-	private PlayGameMapping controlleur;
+	public PlayGameMapping controlleur;
 	
 	//Note : pour pouvoir y accéder depuis notre Thread dans la fonction startGame()
 	private GameCore gameCore = this;
@@ -84,7 +85,7 @@ public class GameCore {
 	 * Arrete la pertie
 	 */
 	public void stopGame() {
-		gameLogic.interrupt();
+		//gameLogic.interrupt();
 	}
 	
 	/*
