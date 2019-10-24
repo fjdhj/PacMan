@@ -1,8 +1,12 @@
 package fr.fjdhj.PacMan.view;
 
+import java.io.File;
+
 import fr.fjdhj.PacMan.gameLogic.GameCore;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class MainMenuMapping {
 	
@@ -13,12 +17,18 @@ public class MainMenuMapping {
 	@FXML
 	private Button exitButton;
 	
+	private Media media;
+	private MediaPlayer mediaPlayer;
 	private GameCore game;
 	
 	public MainMenuMapping() {}
 	
 	@FXML
-	private void initialize() {}
+	private void initialize() {
+		media = new Media(new File("sound/mainMenu/PacMan_Theme_Remix_By_arsenic1987.mp3").toURI().toString());
+		mediaPlayer = new MediaPlayer(media);
+		mediaPlayer.play();
+	}
 	
 	
 	/*
