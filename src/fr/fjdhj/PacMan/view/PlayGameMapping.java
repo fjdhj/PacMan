@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
 public class PlayGameMapping{
@@ -74,15 +75,20 @@ public class PlayGameMapping{
 		this.player = player; 
 		
 		//Récupère les murs
-		Node w;
+		Node a;
 		//On aparcoure les objets notre AnchorPan pricipale
 		for(int i =0; i<pan.getChildren().size(); i++) {
-			//Si c'est un AnchorPan -> donc un mur
-			if((w=pan.getChildren().get(i)) instanceof Rectangle) {
-				wall.add(new Wall((Rectangle) w));
-				System.out.println(w);
+			//Si c'est un AnchorPan -> stock des murs
+			if((a=pan.getChildren().get(i)) instanceof AnchorPane) {
+				for(Node w : ((Pane) a).getChildren()) {
+					if(w instanceof Rectangle) {
+						wall.add(new Wall((Rectangle) w));
+						System.out.println(w);
+					}else {
+						break;
+					}
+				}
 			}
-
 		}
 		return wall;
 	}
@@ -128,6 +134,10 @@ public class PlayGameMapping{
 		
 		
 		
+	}
+	
+	public ImageView getImageViewPlayer() {
+		return PacMan;
 	}
 	
 }

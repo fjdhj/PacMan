@@ -13,10 +13,7 @@ public class GameCore {
 	/*
 	 * Valeur par default du niveau
 	 */
-	private int startX;
-	private int startY;
 	private int startLife;
-	private int startPoint;
 	private Direction startDirection;
 	private PacMan player;
 	private PlayGameMapping controlleur;
@@ -33,34 +30,24 @@ public class GameCore {
 	
 	/**
 	 * Constructeur par défault
-	 * @param startX
-	 * @param startY
 	 * @param startLife
-	 * @param startPoint
+	 * @param Direction
 	 * @param player
 	 */
-	public GameCore(int startX, int startY, int startLife, int startPoint, Direction startDirection, PacMan player) {
-		setStartX(startX);
-		setStartY(startY);
+	public GameCore(int startLife, Direction startDirection, PacMan player) {
 		setStartLife(startLife);
-		setStartPoint(startPoint);
 		setStartDirection(startDirection);
 		setPlayer(player);
 	}
 	
 	/**
-	 * Par défault :- startX et startY son déterminé en fonction du niveau
-	 * 				- startLife vaut 3
+	 * Par défault :- startLife vaut 3
 	 * 				- startDirection vaut LEFT
-	 * 				- l'objet PacMan (player) est crée directement avec ces informations
 	 */
 	public GameCore() {
-		setStartX(0);
-		setStartY(0);
 		setStartLife(0);
-		setStartPoint(0);
 		setStartDirection(Direction.LEFT);		
-		setPlayer(new PacMan(188,222,3,0, Direction.LEFT));
+		setPlayer(new PacMan(0,0,0,0, Direction.LEFT));
 	}
 	
 	/*
@@ -79,6 +66,9 @@ public class GameCore {
 		initKeyListener();	
 		//On fournie a notre controlleur nos objet et on récupère les murs
 		List<Wall> wall = controlleur.setEntityAndGetWall(player);
+		//On met a jour nos coordonées en fonction de l'image view
+		player.setXPos(controlleur.getImageViewPlayer().getLayoutX()+12);
+		player.setYPos(controlleur.getImageViewPlayer().getLayoutY()+12);
 		//On ajoute nos listeneur pour l'interface graphique
 		controlleur.addListener();
 		
@@ -133,17 +123,9 @@ public class GameCore {
 	 * Getteur/Setteur
 	 * ------------------------------------------------------------
 	 */
-	public int getStartX() {return startX;}
-	public void setStartX(int startX) {this.startX = startX;}
-
-	public int getStartY() {return startY;}
-	public void setStartY(int startY) {this.startY = startY;}
 
 	public int getStartLife() {return startLife;}
 	public void setStartLife(int startLife) {this.startLife = startLife;}
-
-	public int getStartPoint() {return startPoint;}
-	public void setStartPoint(int startPoint) {this.startPoint = startPoint;}
 	
 	public Direction getStartDirection() {return startDirection;}
 	public void setStartDirection(Direction startDirection) {this.startDirection = startDirection;}
