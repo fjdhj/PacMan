@@ -109,9 +109,9 @@ public class PacMan {
 	/* On dit que PacMan est placée dans un carrée (il fait 28 de cotée : 24 pour la taille de PacMan + 4 de vide)
 	 * On utilise deux point A et B, placée au extrémité de la face qui avance
 	 * Et on regarde si les deux points sont dans le mur 
-	 * Si il se déplace latéralement : A(d,e) et B(d,f)
-	 * Si il se déplace verticalement : A(e,d) et B(f,d)
-	 * NOTE : dans une direction données (horizontale/verticale), quelque soit le sens, f et e sont identique mais d est different
+	 * Si il se déplace latéralement : A(d,e) et B(d,f) et C(d,g)
+	 * Si il se déplace verticalement : A(e,d) et B(f,d) et C(g,d)
+	 * NOTE : dans une direction données (horizontale/verticale), quelque soit le sens, f et e et g sont identique mais d est different
 	 */
 	/**
 	 * Regarde si PacMan va dans le mur en fonction de la direction
@@ -124,48 +124,50 @@ public class PacMan {
 		
 			switch(direction.get()) {
 			case LEFT:
-				alpha=-15;
+				alpha=-13;
 				horizon=true;
 				break;
 			case RIGHT:
-				alpha=15;
+				alpha=13;
 				horizon=true;
 				break;
 			case UP:
-				alpha=-15;
+				alpha=-13;
 				horizon=false;
 				break;
 			case DOWN:
-				alpha=15;
+				alpha=13;
 				horizon=false;
 				break;
 			}
 			//Si on se déplace horizontalement
 			if(horizon) {
 				/*  d = x+alpha
-				 *  e = y-14
-				 *  f = y+14
+				 *  e = y-12
+				 *  f = y+12
+				 *  g = y
 				 */
 				if(wall.getXmin()<=(xPos.get()+alpha) && (xPos.get()+alpha)<=wall.getXmax() && //On test pour d
-				  ((wall.getYmin()<=(yPos.get()-14) && (yPos.get()-14)<=wall.getYmax()) || //On test pour e
-				  (wall.getYmin()<=(yPos.get()+14) && (yPos.get()+14)<=wall.getYmax()))){ //On test pour f
-					//Si toutes les condiotions son OK
-					return true;
-					
+				  ((wall.getYmin()<=(yPos.get()-12) && (yPos.get()-12)<=wall.getYmax()) || //On test pour e
+				  (wall.getYmin()<=(yPos.get()+12) && (yPos.get()+12)<=wall.getYmax()) ||
+				  (wall.getYmin()<=yPos.get() && yPos.get()<=wall.getYmax()))){ //On test pour f
+						//Si toutes les condiotions son OK
+						return true;
 				}
 				
 			//Si on se déplace verticalment
 			}else {
 				/*  d = y+alpha
-				 *  e = x-14
-				 *  f = x+14
+				 *  e = x-12
+				 *  f = x+12
+				 *  g = x
 				 */
 				if(wall.getYmin()<=(yPos.get()+alpha) && (yPos.get()+alpha)<=wall.getYmax() && //On test pour d
-				  ((wall.getXmin()<=(xPos.get()-14) && (xPos.get()-14)<=wall.getXmax()) || //On test pour e
-				  (wall.getXmin()<=(xPos.get()+14) && (xPos.get()+14)<=wall.getXmax()))){ //On test pour f
-					//Si toutes les condiotions son OK
-					return true;
-					
+				  ((wall.getXmin()<=(xPos.get()-12) && (xPos.get()-12)<=wall.getXmax()) || //On test pour e
+				  (wall.getXmin()<=(xPos.get()+12) && (xPos.get()+12)<=wall.getXmax()) ||
+				  (wall.getXmin()<= xPos.get() && xPos.get()<=wall.getXmax()))){ //On test pour f
+						//Si toutes les condiotions son OK
+						return true;
 				}
 			}
 
@@ -177,9 +179,9 @@ public class PacMan {
 	/* On dit que PacMan est placée dans un carrée (il fait 28 de cotée : 24 pour la taille de PacMan + 4 de vide)
 	 * On utilise deux point A et B, placée au extrémité de la face qui avance
 	 * Et on regarde si les deux points sont dans le mur 
-	 * Si il se déplace latéralement : A(d,e) et B(d,f)
-	 * Si il se déplace verticalement : A(e,d) et B(f,d)
-	 * NOTE : dans une direction données (horizontale/verticale), quelque soit le sens, f et e sont identique mais d est different
+	 * Si il se déplace latéralement : A(d,e) et B(d,f) et C(d,g)
+	 * Si il se déplace verticalement : A(e,d) et B(f,d) et C(g,d)
+	 * NOTE : dans une direction données (horizontale/verticale), quelque soit le sens, f et e et g sont identique mais d est different
 	 */
 	/**
 	 * Regarde si PacMan va dans l'un des murs en fonction de la direction
@@ -209,12 +211,13 @@ public class PacMan {
 			if(horizon) {
 				for(Wall wall : ListWall) {	
 					/*  d = x+alpha
-					 *  e = y-14
-					 *  f = y+14
+					 *  e = y-12
+					 *  f = y+12
 					 */
 					if(wall.getXmin()<=(xPos.get()+alpha) && (xPos.get()+alpha)<=wall.getXmax() && //On test pour d
 					  ((wall.getYmin()<=(yPos.get()-12) && (yPos.get()-12)<=wall.getYmax()) || //On test pour e
-					  (wall.getYmin()<=(yPos.get()+12) && (yPos.get()+12)<=wall.getYmax()))){ //On test pour f
+					  (wall.getYmin()<=(yPos.get()+12) && (yPos.get()+12)<=wall.getYmax()) ||
+					  (wall.getYmin()<=yPos.get() && yPos.get()<=wall.getYmax()))){ //On test pour f
 						//Si toutes les condiotions son OK
 						return true;
 					}
@@ -224,12 +227,13 @@ public class PacMan {
 			}else {
 				for(Wall wall : ListWall) {	
 					/*  d = y+alpha
-					 *  e = x-14
-					 *  f = x+14
+					 *  e = x-12
+					 *  f = x+12
 					 */
 					if(wall.getYmin()<=(yPos.get()+alpha) && (yPos.get()+alpha)<=wall.getYmax() && //On test pour d
 					  ((wall.getXmin()<=(xPos.get()-12) && (xPos.get()-12)<=wall.getXmax()) || //On test pour e
-					  (wall.getXmin()<=(xPos.get()+12) && (xPos.get()+12)<=wall.getXmax()))){ //On test pour f
+					  (wall.getXmin()<=(xPos.get()+12) && (xPos.get()+12)<=wall.getXmax()) ||
+					  (wall.getXmin()<= xPos.get() && xPos.get()<=wall.getXmax()))){ //On test pour f
 						//Si toutes les condiotions son OK
 						return true;
 					}
@@ -270,7 +274,8 @@ public class PacMan {
 			for(Wall wall : ListWall) {	
 				if(wall.getXmin()<=(xPos.get()+alpha) && (xPos.get()+alpha)<=wall.getXmax() && 
 				  ((wall.getYmin()<=(yPos.get()-12) && (yPos.get()-12)<=wall.getYmax()) ||
-				  (wall.getYmin()<=(yPos.get()+12) && (yPos.get()+12)<=wall.getYmax()))) {
+				  (wall.getYmin()<=(yPos.get()+12) && (yPos.get()+12)<=wall.getYmax()) ||
+				  (wall.getYmin()<=yPos.get() && yPos.get()<= wall.getYmax()))) {
 					return false;
 				}
 			}
@@ -278,7 +283,8 @@ public class PacMan {
 			for(Wall wall : ListWall) {	
 				if(wall.getYmin()<=(yPos.get()+alpha) && (yPos.get()+alpha)<=wall.getYmax() && 
 				  ((wall.getXmin()<=(xPos.get()-12) && (xPos.get()-12)<=wall.getXmax()) ||
-				  (wall.getXmin()<=(xPos.get()+12) && (xPos.get()+12)<=wall.getXmax()))) {
+				  (wall.getXmin()<=(xPos.get()+12) && (xPos.get()+12)<=wall.getXmax()) ||
+				  (wall.getXmin()<=xPos.get() && xPos.get()<=wall.getXmax()))) {
 					return false;
 				}
 			}
