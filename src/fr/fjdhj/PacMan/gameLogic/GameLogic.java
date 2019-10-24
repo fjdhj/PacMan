@@ -21,12 +21,7 @@ public class GameLogic extends Thread{
 	}
 	
 	@Override 
-	public void run() {
-		 try {
-			 Thread.sleep(500);
-		 } catch (InterruptedException e) {
-			 e.printStackTrace();
-		 }
+	public void run() {		
 		
 				//Ici on teste si la partie est fini
 				 while(run) {
@@ -61,7 +56,6 @@ public class GameLogic extends Thread{
 											 
 											 
 										 }else {
-											 System.out.println("+100");
 											 //On ajoute les points a PacMan
 											 Platform.runLater(new Runnable() {
 												@Override

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -17,10 +16,12 @@ public class MainClass extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
-		Platform.setImplicitExit(false);
 		stagePrincipal = primaryStage;
 		//Nom de la fenêtre
-		stagePrincipal.setTitle("PacMan");		
+		stagePrincipal.setTitle("PacMan");	
+		//Resout bug affichage au début d'une partie ?
+		stagePrincipal.requestFocus();
+		
 		//Charge le fichier FXML pour afficher le contenu, ici mainMenu
 		initScene(MainClass.class.getResource("view/MainMenu.fxml"));
 	}
@@ -53,6 +54,8 @@ public class MainClass extends Application {
 			Scene scene = new Scene(conteneurPrincipal);
 			//Ajout de la scene dans le stage
 			stagePrincipal.setScene(scene);
+			//Mets le stage au centre
+			stagePrincipal.centerOnScreen();
 			//Affiche le stage
 			stagePrincipal.show();
 			

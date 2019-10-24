@@ -6,7 +6,6 @@ import fr.fjdhj.PacMan.MainClass;
 import fr.fjdhj.PacMan.gameLogic.PacMan.PacMan;
 import fr.fjdhj.PacMan.view.MainMenuMapping;
 import fr.fjdhj.PacMan.view.PlayGameMapping;
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 
@@ -133,6 +132,9 @@ public class GameCore {
 
 	public PacMan getPlayer() {return player;}
 	public void setPlayer(PacMan player) {this.player = player;}
+
+	public GameLogic getGameLogic() {return gameLogic;}
+
 	
 
 }

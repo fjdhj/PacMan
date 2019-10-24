@@ -8,11 +8,13 @@ import fr.fjdhj.PacMan.gameLogic.Wall;
 import fr.fjdhj.PacMan.gameLogic.PacMan.PacMan;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
@@ -65,6 +67,8 @@ public class PlayGameMapping {
 		PacMan.setImage(new Image(PlayGameMapping.class.getResourceAsStream("ressource/PacMan.png")));
 		PacMan.setRotate(180);
 		point.setText("0");
+		//Permet de résoudre le freez de PacMan au début
+		
 	}
 
 
@@ -135,7 +139,7 @@ public class PlayGameMapping {
 				//On mets a jour la position X
 				//NOTE : l'explication du -12 se trouve en haut
 				PacMan.setLayoutX(((double) newValue) - 12);
-				
+
 			}});
 		
 		//On écoute le nombre de vie restante a PacMan et si elle change
@@ -151,10 +155,21 @@ public class PlayGameMapping {
 			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
 				//On met a jour l'affichage
 				point.setText(arg2.toString());
+			}
+			
+		});
+		
+		pan.setOnMouseExited(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				System.out.println("La souris quite la fenetre");
 				
 			}
 			
 		});
+		
+		
 		
 		
 		
