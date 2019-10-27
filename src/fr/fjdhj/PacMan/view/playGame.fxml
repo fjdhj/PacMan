@@ -4,13 +4,18 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.ClosePath?>
+<?import javafx.scene.shape.LineTo?>
+<?import javafx.scene.shape.MoveTo?>
+<?import javafx.scene.shape.Path?>
+<?import javafx.scene.shape.QuadCurveTo?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.fjdhj.PacMan.view.PlayGameMapping">
+<AnchorPane fx:id="pan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.fjdhj.PacMan.view.PlayGameMapping">
    <children>
       <ImageView fx:id="PacMan" fitHeight="24.0" fitWidth="24.0" layoutX="187.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true" />
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="398.0">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.0" prefHeight="440.0" prefWidth="398.0">
          <children>
             <Rectangle height="146.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
             <Rectangle height="10.0" layoutX="10.0" layoutY="136.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
@@ -38,22 +43,22 @@
             <Rectangle height="10.0" layoutY="430.0" stroke="BLACK" strokeType="INSIDE" width="398.0" />
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="400.0" prefWidth="398.0">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="398.0">
          <children>
-            <Rectangle arcWidth="10.0" height="28.0" layoutX="38.0" layoutY="38.0" stroke="BLACK" strokeType="INSIDE" width="42.0" />
-            <Rectangle height="28.0" layoutX="108.0" layoutY="38.0" stroke="BLACK" strokeType="INSIDE" width="56.0" />
-            <Rectangle height="14.0" layoutX="38.0" layoutY="94.0" stroke="BLACK" strokeType="INSIDE" width="42.0" />
-            <Rectangle height="28.0" layoutX="318.0" layoutY="38.0" stroke="BLACK" strokeType="INSIDE" width="42.0" />
-            <Rectangle height="28.0" layoutX="234.0" layoutY="38.0" stroke="BLACK" strokeType="INSIDE" width="56.0" />
-            <Rectangle height="14.0" layoutX="318.0" layoutY="94.0" stroke="BLACK" strokeType="INSIDE" width="42.0" />
-            <Rectangle height="56.0" layoutX="108.0" layoutY="220.0" stroke="BLACK" strokeType="INSIDE" width="14.0" />
-            <Rectangle height="56.0" layoutX="276.0" layoutY="220.0" stroke="BLACK" strokeType="INSIDE" width="14.0" />
-            <Rectangle height="14.0" layoutX="108.0" layoutY="304.0" stroke="BLACK" strokeType="INSIDE" width="56.0" />
-            <Rectangle height="14.0" layoutX="234.0" layoutY="304.0" stroke="BLACK" strokeType="INSIDE" width="56.0" />
-            <Rectangle height="56.0" layoutX="150.0" layoutY="178.0" stroke="BLACK" strokeType="INSIDE" width="98.0" />
+            <Rectangle arcHeight="12.0" arcWidth="12.0" height="28.0" layoutX="38.0" layoutY="38.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5" width="42.0" />
+            <Rectangle arcHeight="12.0" arcWidth="12.0" height="28.0" layoutX="108.0" layoutY="38.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5" width="56.0" />
+            <Rectangle arcHeight="12.0" arcWidth="12.0" height="14.0" layoutX="38.0" layoutY="94.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5" width="42.0" />
+            <Rectangle arcHeight="12.0" arcWidth="12.0" height="28.0" layoutX="318.0" layoutY="38.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5" width="42.0" />
+            <Rectangle arcHeight="12.0" arcWidth="12.0" height="28.0" layoutX="234.0" layoutY="38.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5" width="56.0" />
+            <Rectangle arcHeight="12.0" arcWidth="12.0" height="14.0" layoutX="318.0" layoutY="94.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5" width="42.0" />
+            <Rectangle arcHeight="12.0" arcWidth="12.0" height="56.0" layoutX="108.0" layoutY="220.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5" width="14.0" />
+            <Rectangle arcHeight="12.0" arcWidth="12.0" height="56.0" layoutX="276.0" layoutY="220.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5" width="14.0" />
+            <Rectangle arcHeight="12.0" arcWidth="12.0" height="14.0" layoutX="108.0" layoutY="304.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5" width="56.0" />
+            <Rectangle arcHeight="12.0" arcWidth="12.0" height="14.0" layoutX="234.0" layoutY="304.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5" width="56.0" />
+            <Rectangle arcHeight="12.0" arcWidth="12.0" height="56.0" layoutX="150.0" layoutY="178.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5" width="98.0" />
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="440.0" prefWidth="398.0">
+      <AnchorPane opacity="0.0" prefHeight="440.0" prefWidth="398.0">
          <children>
             <Rectangle height="14.0" layoutX="150.0" layoutY="94.0" stroke="BLACK" strokeType="INSIDE" width="98.0" />
             <Rectangle height="42.0" layoutX="192.0" layoutY="108.0" stroke="BLACK" strokeType="INSIDE" width="14.0" />
@@ -71,15 +76,15 @@
             <Rectangle height="42.0" layoutX="276.0" layoutY="346.0" stroke="BLACK" strokeType="INSIDE" width="14.0" />
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="440.0" prefWidth="398.0">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.0" prefHeight="440.0" prefWidth="398.0">
          <children>
-            <Rectangle height="14.0" layoutX="38.0" layoutY="304.0" stroke="BLACK" strokeType="INSIDE" width="42.0" />
+            <Rectangle height="14.0" layoutX="38.0" layoutY="304.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="0.0" width="42.0" />
             <Rectangle height="42.0" layoutX="66.0" layoutY="318.0" stroke="BLACK" strokeType="INSIDE" width="14.0" />
             <Rectangle height="14.0" layoutX="318.0" layoutY="304.0" stroke="BLACK" strokeType="INSIDE" width="42.0" />
             <Rectangle height="42.0" layoutX="318.0" layoutY="318.0" stroke="BLACK" strokeType="INSIDE" width="14.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="pointPane" prefHeight="440.0" prefWidth="398.0">
+      <AnchorPane fx:id="pointPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="398.0">
          <children>
             <Circle fill="#ebdc07" layoutX="24.0" layoutY="24.0" radius="2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             <Circle fill="#ebdc07" layoutX="38.0" layoutY="24.0" radius="2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
@@ -327,11 +332,312 @@
             <Circle fill="#ebdc07" layoutX="374.0" layoutY="416.0" radius="2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
          </children>
       </AnchorPane>
-      <Label fx:id="point" alignment="CENTER_RIGHT" layoutX="406.0" layoutY="32.0" prefHeight="42.0" prefWidth="159.0" text="POINT">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="398.0">
+         <children>
+            <Path fill="BLACK" layoutX="38.0" layoutY="304.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5">
+                <elements>
+                    <MoveTo x="12.0" />
+                    <LineTo x="36.0" />
+                    <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="6.0" />
+                  <LineTo x="42.0" y="50.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" x="-2.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-30.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" x="-16.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-2.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="6.0" y="-6.0" />
+                    <ClosePath />
+                </elements>
+            </Path>
+            <Path fill="BLACK" layoutX="318.0" layoutY="304.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5">
+               <elements>
+                  <MoveTo x="12.0" />
+                  <LineTo x="36.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" y="2.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" x="-16.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" y="30.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" x="-2.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-44.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="6.0" y="-6.0" />
+                  <ClosePath />
+               </elements>
+            </Path>
+            <Path fill="BLACK" layoutX="150.0" layoutY="94.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5">
+                <elements>
+                    <MoveTo x="20.0" />
+                    <LineTo absolute="false" x="72.0" />
+                    <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" y="2.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" x="-30.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" y="30.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" x="-2.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-30.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" x="-30.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-2.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="6.0" y="-6.0" />
+                    <ClosePath />
+                </elements>
+            </Path>
+            <Path fill="BLACK" layoutX="108.0" layoutY="94.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5">
+               <elements>
+                  <MoveTo x="6.0" />
+                  <LineTo absolute="false" x="2.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" y="30.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" x="30.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" y="2.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" x="-30.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" y="30.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" x="-2.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-86.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="6.0" y="-6.0" />
+                  <ClosePath />
+               </elements>
+            </Path>
+            <Path fill="BLACK" layoutX="276.0" layoutY="94.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5">
+               <elements>
+                  <MoveTo x="6.0" />
+                  <LineTo absolute="false" x="2.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" y="86.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" x="-2.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-30.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" x="-30.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-2.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="6.0" y="-6.0" />
+                  <LineTo absolute="false" x="30.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-30.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="6.0" y="-6.0" />
+                  <ClosePath />
+               </elements>
+            </Path>
+            <Path fill="BLACK" layoutX="150.0" layoutY="262.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5">
+               <elements>
+                  <MoveTo x="20.0" />
+                  <LineTo absolute="false" x="72.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" y="2.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" x="-30.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" y="30.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" x="-2.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-30.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" x="-30.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-2.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="6.0" y="-6.0" />
+                  <ClosePath />
+               </elements>
+            </Path>
+            <Path fill="BLACK" layoutX="150.0" layoutY="346.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5">
+               <elements>
+                  <MoveTo x="20.0" />
+                  <LineTo absolute="false" x="72.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" y="2.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" x="-30.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" y="30.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" x="-2.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-30.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" x="-30.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-2.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="6.0" y="-6.0" />
+                  <ClosePath />
+               </elements>
+            </Path>
+            <Path fill="BLACK" layoutX="38.0" layoutY="388.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5">
+               <elements>
+                  <MoveTo x="20.0" />
+                  <LineTo absolute="false" x="44.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-30.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="6.0" y="-6.0" />
+                  <LineTo absolute="false" x="2.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" y="30.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" x="30.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" y="2.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" x="-114.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-2.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="6.0" y="-6.0" />
+                  <ClosePath />
+               </elements>
+            </Path>
+            <Path fill="BLACK" layoutX="234.0" layoutY="388.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5">
+               <elements>
+                  <MoveTo x="20.0" />
+                  <LineTo absolute="false" x="16.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-30.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="6.0" y="-6.0" />
+                  <LineTo absolute="false" x="2.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" y="30.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" x="58.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" y="2.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" x="-114.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-2.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="6.0" y="-6.0" />
+                  <ClosePath />
+               </elements>
+            </Path>
+            <Path fill="BLACK" layoutY="220.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5">
+               <elements>
+                  <MoveTo x="12.0" />
+                  <LineTo absolute="false" x="62.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" y="44.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" x="-58.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" y="58.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" x="16.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" y="2.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" x="-16.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" y="58.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" x="366.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-58.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" x="-16.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-2.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="6.0" y="-6.0" />
+                  <LineTo absolute="false" x="16.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-58.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" x="-58.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-44.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="6.0" y="-6.0" />
+                  <LineTo absolute="false" x="74.0" />
+                  <LineTo absolute="false" y="10.0" />
+                  <LineTo absolute="false" x="-64.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" y="24.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" x="58.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" y="162.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" x="-386.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-162.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="6.0" y="-6.0" />
+                  <LineTo absolute="false" x="56.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-24.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" x="-62.0" />
+                  <LineTo absolute="false" y="-10.0" />
+                  <ClosePath />
+               </elements>
+            </Path>
+            <Path fill="BLACK" layoutY="182.0" stroke="BLUE" strokeType="INSIDE" strokeWidth="1.5">
+               <elements>
+                  <MoveTo />
+                  <LineTo absolute="false" x="64.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-24.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" x="-58.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-134.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="6.0" y="-6.0" />
+                  <LineTo absolute="false" x="386.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" y="134.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" x="-58.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" y="24.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" x="64.0" />
+                  <LineTo absolute="false" y="10.0" />
+                  <LineTo absolute="false" x="-74.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-44.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="6.0" y="-6.0" />
+                  <LineTo absolute="false" x="58.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-114.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" x="-170.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" y="44.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" x="-2.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" y="-44.0" />
+                  <QuadCurveTo absolute="false" controlY="-6.0" x="-6.0" y="-6.0" />
+                  <LineTo absolute="false" x="-170.0" />
+                  <QuadCurveTo absolute="false" controlX="-6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" y="114.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" x="58.0" />
+                  <QuadCurveTo absolute="false" controlX="6.0" x="6.0" y="6.0" />
+                  <LineTo absolute="false" y="44.0" />
+                  <QuadCurveTo absolute="false" controlY="6.0" x="-6.0" y="6.0" />
+                  <LineTo absolute="false" x="-74.0" />
+                  <ClosePath />
+               </elements>
+            </Path>
+         </children>
+      </AnchorPane>
+      <Label fx:id="point" alignment="CENTER_RIGHT" layoutX="406.0" layoutY="32.0" prefHeight="42.0" prefWidth="159.0" text="POINT" textFill="#c5c5c5">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="568.0" layoutY="44.0" text="pts" />
+      <Label layoutX="568.0" layoutY="44.0" text="pts" textFill="#c5c5c5" />
    </children>
 </AnchorPane>
