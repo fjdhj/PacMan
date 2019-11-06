@@ -15,6 +15,7 @@
 <AnchorPane fx:id="pan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.fjdhj.PacMan.view.PlayGameMapping">
    <children>
       <ImageView fx:id="PacMan" fitHeight="24.0" fitWidth="24.0" layoutX="187.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="Blinky" fitHeight="24.0" fitWidth="24.0" layoutX="187.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" />
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.0" prefHeight="440.0" prefWidth="398.0">
          <children>
             <Rectangle height="146.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />

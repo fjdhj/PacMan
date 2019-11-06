@@ -5,7 +5,8 @@ import java.util.List;
 
 import fr.fjdhj.PacMan.gameLogic.Direction;
 import fr.fjdhj.PacMan.gameLogic.Wall;
-import fr.fjdhj.PacMan.gameLogic.PacMan.PacMan;
+import fr.fjdhj.PacMan.gameLogic.Entity.Ghost;
+import fr.fjdhj.PacMan.gameLogic.Entity.PacMan;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -50,6 +51,8 @@ public class PlayGameMapping {
 	@FXML
 	private ImageView PacMan;
 	@FXML
+	private ImageView Blinky; //Fantome rouge
+	@FXML
 	public AnchorPane pan;
 	@FXML
 	private AnchorPane pointPane;
@@ -57,6 +60,7 @@ public class PlayGameMapping {
 	private Label point;
 	
 	private PacMan player;
+	private Ghost BlinkyEntity;
 	private List<Wall> wall = new ArrayList<Wall>();
 	private List<Circle> pointCoords = new ArrayList<Circle>();
 	
@@ -67,7 +71,8 @@ public class PlayGameMapping {
 		PacMan.setImage(new Image(PlayGameMapping.class.getResourceAsStream("ressource/PacMan.png")));
 		PacMan.setRotate(180);
 		point.setText("0");
-		//Permet de résoudre le freez de PacMan au début
+		//Mets a Blinky (ImageView) notre image de Blinky
+		Blinky.setImage(new Image(PlayGameMapping.class.getResourceAsStream("ressource/Blinky.png")));
 		
 	}
 
@@ -83,8 +88,9 @@ public class PlayGameMapping {
 	
 	//Permé de fournir les entité : fantome et PacMan et de récupérer les murs
 	//NOTE : les fantomes seront a ajouter via cette fonction
-	public List<Wall> setEntityAndGetWall(PacMan player) {
+	public List<Wall> setEntityAndGetWall(PacMan player, Ghost Blinky) {
 		this.player = player; 
+		BlinkyEntity = Blinky;
 		
 		//Récupère les murs
 		Node a;
@@ -111,7 +117,9 @@ public class PlayGameMapping {
 		return wall;
 	}
 	
-	
+	/*
+	 * Listeneur pour mettre a jour l'afichage
+	 */
 	public void addListener() {
 		//On écoute la direction de PacMan et si elle change :
 		player.getDirection().addListener(new ChangeListener<Direction>(){
@@ -159,6 +167,8 @@ public class PlayGameMapping {
 			
 		});
 		
+		
+		
 		pan.setOnMouseExited(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -179,6 +189,10 @@ public class PlayGameMapping {
 	
 	public ImageView getImageViewPlayer() {
 		return PacMan;
+	}
+	
+	public ImageView getImageViewBlinky() {
+		return Blinky;
 	}
 
 	public List<Circle> getPointCoords() {

@@ -23,11 +23,14 @@ public class GameLogic extends Thread{
 	@Override 
 	public void run() {		
 		
+		//On déplace de manière parallèle les fantome car il ne vont aps a la même vitesse
+		ghostGameLogic();
+		
 				//Ici on teste si la partie est fini
 				 while(run) {
 					 //Pause pour limiter la vitesse
 					 try {
-						 Thread.sleep(5);
+						 Thread.sleep(6);
 					 } catch (InterruptedException e) {
 						 e.printStackTrace();
 					 }
@@ -81,6 +84,29 @@ public class GameLogic extends Thread{
 		
 
 	}
-	 
+	
+	private void ghostGameLogic() {
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while(run) {
+					try {
+						Thread.sleep(5);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					if(gameCore.getBlinky().canTurn(wall)) {
+						
+					}
+				}
+				
+			}
+			
+		});
+	t.start();
+	
+	}
 	 
 }
