@@ -6,7 +6,7 @@ import fr.fjdhj.PacMan.MainClass;
 import fr.fjdhj.PacMan.gameLogic.Entity.Ghost;
 import fr.fjdhj.PacMan.gameLogic.Entity.PacMan;
 import fr.fjdhj.PacMan.gameLogic.IA.BlinkyIA;
-import fr.fjdhj.PacMan.view.MainMenuMapping;
+import fr.fjdhj.PacMan.gameLogic.IA.IA;
 import fr.fjdhj.PacMan.view.PlayGameMapping;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
@@ -18,6 +18,7 @@ public class GameCore {
 	private int startLife;
 	private Direction startDirection;
 	private PacMan player;
+	private List<Wall> wall;
 	public PlayGameMapping controlleur;
 	
 	//Note : créer avec la fonction addGhost
@@ -26,9 +27,6 @@ public class GameCore {
 	//Note : pour pouvoir y accéder depuis notre Thread dans la fonction startGame()
 	private GameCore gameCore = this;
 	private GameLogic gameLogic;
-	
-	//Variable pour nos fonction gérant les fantomes
-	private boolean IaTurn = true;
 	
 	/*
 	 * -----------------------------------------------------------------------
@@ -68,16 +66,18 @@ public class GameCore {
 	 * Démarre la partie
 	 */	
 	public void startGame() {
+		Blinky = new Ghost(0,0,Direction.LEFT);
+		
 		//On charge notre jeu et on récupère le controlleur
-		controlleur = (PlayGameMapping) MainClass.initScene(MainMenuMapping.class.getResource("playGame.fxml"));
+		controlleur = (PlayGameMapping) MainClass.initScene(MainClass.class.getResource("view/playGame.fxml"));
 		//On innitialise notre KeyListeneur
 		initKeyListener();	
 		
-		//On créer nos Phantome et leur IA corespondante via la fonction
-		addGhost();
-		
 		//On fournie a notre controlleur nos objet et on récupère les murs
-		List<Wall> wall = controlleur.setEntityAndGetWall(player, Blinky);
+		wall = controlleur.setEntityAndGetWall(player, Blinky);
+		
+		//On créer nos Phantome et leur IA corespondante via la fonction
+		//addGhost();
 		
 		//On met a jour nos coordonées en fonction de l'image view
 		player.updatePosition(controlleur.getImageViewPlayer());
@@ -86,40 +86,19 @@ public class GameCore {
 		//On ajoute nos listeneur pour l'interface graphique
 		controlleur.addListener();
 		
+		//La carte se divise en tuile de 14x14, pour l'IA, il faut convertire les murs en tuils accéssible ou non
+		boolean[][] matrice = IA.createMatrice(wall, 28, 31);
+		
+		//Blinky : le phantome rouge
+		BlinkyIA blinkyIA = new BlinkyIA(Blinky, player, matrice);
+		Blinky.setIA(blinkyIA);
+		
 		//On appel notre GameCore
 		GameLogic gameLogic = new GameLogic(gameCore, wall);
 		//On démare le Thread principale
 		gameLogic.start();
 		
 
-	}
-	/**
-	 * Ajoute les Phantomes et leur IA
-	 */
-	private void addGhost() {
-		//Blinky : le phantome rouge
-		Blinky = new Ghost();
-		BlinkyIA blinkyIA = new BlinkyIA(Blinky, player);
-		
-		IaTurn = true;
-		
-		Thread t = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				while(IaTurn) {
-					blinkyIA.folow();
-				}
-				
-				
-			}
-			
-		});
-		t.start();
-		
-	}
-	
-	private void stopGhostIA() {
-		//Arrete le Thread dans la fonctoion addGhost
 	}
 
 	/**

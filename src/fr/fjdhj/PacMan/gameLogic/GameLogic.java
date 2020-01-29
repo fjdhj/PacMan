@@ -30,7 +30,7 @@ public class GameLogic extends Thread{
 				 while(run) {
 					 //Pause pour limiter la vitesse
 					 try {
-						 Thread.sleep(6);
+						 Thread.sleep(5);
 					 } catch (InterruptedException e) {
 						 e.printStackTrace();
 					 }
@@ -39,15 +39,16 @@ public class GameLogic extends Thread{
 					 if(gameCore.getPlayer().getNewDirection().get()!=null)	{
 						 gameCore.getPlayer().canTurn(wall);
 						 
-					 }		 
+					 }
+					 
 					 //Si PacMan ne va pas dans le mur
 					 if(!gameCore.getPlayer().goInWall(wall)) {
 						 gameCore.getPlayer().moove();
 					 }
 					
 					 //On regarde si PacMan gagne des points
-					 if((((gameCore.getPlayer().getXPos().get()-10)%14 == 0) || ((gameCore.getPlayer().getXPos().get()-10)%14 == 0)) && 
-					 (((gameCore.getPlayer().getYPos().get()-10)%14 ==0) ||((gameCore.getPlayer().getYPos().get()-10)%14 ==0))) {
+					 if((((gameCore.getPlayer().getXPos().get()-7)%14 == 0) || ((gameCore.getPlayer().getXPos().get()-7)%14 == 0)) && 
+					 (((gameCore.getPlayer().getYPos().get()-7)%14 ==0) ||((gameCore.getPlayer().getYPos().get()-7)%14 ==0))) {
 						 //On regarde s'il n'a pas deja été mangé
 						 
 						 for(int i = 0; i<gameCore.controlleur.getPointCoords().size(); i++) {
@@ -85,7 +86,7 @@ public class GameLogic extends Thread{
 
 	}
 	
-	private void ghostGameLogic() {
+	public void ghostGameLogic() {
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -97,9 +98,18 @@ public class GameLogic extends Thread{
 						e.printStackTrace();
 					}
 					
-					if(gameCore.getBlinky().canTurn(wall)) {
-						
+					if(gameCore.getBlinky().getNewDirection().get()!=null) {
+						gameCore.getBlinky().canTurn(wall);
 					}
+					
+					 //Si blinky ne va dans le mur
+					 if(!gameCore.getBlinky().goInWall(wall)) {
+						 gameCore.getBlinky().moove();
+						 if((int)(gameCore.getBlinky().getXPos().get()-gameCore.getBlinky().getDirection().get().getModifier())/14 != (int)gameCore.getBlinky().getXPos().get()/14
+							|| (int)(gameCore.getBlinky().getYPos().get()-gameCore.getBlinky().getDirection().get().getModifier())/14 != (int)gameCore.getBlinky().getYPos().get()/14)
+						 
+							 gameCore.getBlinky().getIA().mainIA();
+					 }
 				}
 				
 			}

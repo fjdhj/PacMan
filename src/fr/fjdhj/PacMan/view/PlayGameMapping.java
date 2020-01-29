@@ -72,7 +72,7 @@ public class PlayGameMapping {
 		PacMan.setRotate(180);
 		point.setText("0");
 		//Mets a Blinky (ImageView) notre image de Blinky
-		Blinky.setImage(new Image(PlayGameMapping.class.getResourceAsStream("ressource/Blinky.png")));
+		Blinky.setImage(new Image(PlayGameMapping.class.getResourceAsStream("ressource/blinky.png")));
 		
 	}
 
@@ -167,7 +167,25 @@ public class PlayGameMapping {
 			
 		});
 		
+		BlinkyEntity.getXPos().addListener(new ChangeListener<Number>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number newValue) {
+				Blinky.setLayoutX(((double) newValue)-12);
+				
+			}
+			
+		});
 		
+		BlinkyEntity.getYPos().addListener(new ChangeListener<Number>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				Blinky.setLayoutY(((double) newValue)-12);
+				
+			}
+			
+		});
 		
 		pan.setOnMouseExited(new EventHandler<MouseEvent>() {
 

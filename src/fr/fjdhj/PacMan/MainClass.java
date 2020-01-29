@@ -1,6 +1,5 @@
 package fr.fjdhj.PacMan;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -8,7 +7,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.media.Media;
 import javafx.stage.Stage;
 
 public class MainClass extends Application {

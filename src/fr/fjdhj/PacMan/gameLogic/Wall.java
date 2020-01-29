@@ -44,6 +44,21 @@ public class Wall {
 		setWall(null);
 	}
 	
+	/**
+	 * 
+	 * @param x Coordonée X du point
+	 * @param y Coordonée Y du point
+	 * @return true si le point est dans le mur; 
+	 * 			false s'il ne l'est pas
+	 */
+	public boolean pointInWall(double x, double y) {
+		if(Xmin<=x && x<=Xmax) {
+			if(Ymin<=y && y<=Ymax) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public double getXmin() {return Xmin;}
 	public void setXmin(double xmin) {Xmin = xmin;}

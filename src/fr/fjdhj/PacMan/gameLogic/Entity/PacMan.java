@@ -1,15 +1,10 @@
 package fr.fjdhj.PacMan.gameLogic.Entity;
 
-import java.util.List;
-
 import fr.fjdhj.PacMan.gameLogic.Direction;
-import fr.fjdhj.PacMan.gameLogic.Wall;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
 
 public class PacMan extends Entity{
 	

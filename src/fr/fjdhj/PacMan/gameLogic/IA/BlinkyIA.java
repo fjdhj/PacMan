@@ -8,64 +8,29 @@ public class BlinkyIA extends IA{
 
 
 	
-	public BlinkyIA(Ghost Blinky, PacMan player) {
+	public BlinkyIA(Ghost Blinky, PacMan player, boolean[][] matrice) {
 		setGhost(Blinky);
 		setPlayer(player);
-		//Pour que la derniérer direction de PacMan ne soit pas le néan
-		updatePacManDirection();
+		setMatrice(matrice);
+
 	}
 
-	public void folow() {
-		//Si PacMan change de direction
-		if(!PacManDirection.equals(player.getDirection().get())) {
-			//On mets a jour la direction enregistré de PacMan
-			updatePacManDirection();
-			
-			/*
-			 * On détermine dans quelle partie se situe PacMan
-			 */
-			Direction horizontal, verticale;
-			double horizontalAxe = ghost.getXPos().get()-player.getXPos().get();
-			double verticalAxe = ghost.getYPos().get()-player.getYPos().get();
-			
-			System.out.println(ghost.getXPos().get() + " " +player.getXPos().get());
-			
-			//Verification axe horizontal
-			if(horizontalAxe>0) { 
-				//Alors PacMan se trouve a gauche du phantome
-				horizontal = Direction.LEFT;
-			}else if(horizontalAxe<0){
-				//Alors PacMan se trouve a droite du phantome
-				horizontal = Direction.RIGHT;
-				//On veut que horizontalAxe soit positive
-				horizontalAxe = Math.abs(horizontalAxe);
-			}else {
-				//Les deux entité sont aligné horizontalement
-				horizontal = null;
-			}
-			
-			//Verifiaction axe vertical
-			if(verticalAxe>0) { 
-				//Alors PacMan se trouve au dessu du phantome
-				verticale = Direction.UP;
-			}else if(verticalAxe<0){
-				//Alors PacMan se trouve en dessous du phantome
-				verticale = Direction.DOWN;
-				//On veut que verticalAxe soit positive
-				verticalAxe = Math.abs(verticalAxe);
-			}else {
-				//Les deux entité sont aligné verticalement
-				verticale = null;
-			}
-			
-			System.out.println(horizontalAxe + "   " + verticalAxe +"     " + verticale +" " +horizontal);
-			
-			/*
-			 * Prise de decision de la part de l'IA
-			 */
-			/*if(ghost.isAnIntersect(listWall)) {
-				
-			}*/
+	@Override
+	public void mainIA() {
+		
+		//On récupère coordonée de PacMan et on convertie en coordonée tuile
+		int destx = (int) (player.getXPos().get()/14);	
+		int desty = (int) (player.getYPos().get()/14);
+		
+		//On récupère coordonée de Blinky et on convertie en coordonée tuile
+		int x = (int) (ghost.getXPos().get()/14);	
+		int y = (int) (ghost.getYPos().get()/14);
+		//On appel notre fonction afin de récupérer les coordonées
+		Direction dir = regularPathFiding(matrice, destx, desty, x, y, ghost.getDirection().get());
+		System.out.println(dir);
+		//Si on récupère pas rien, on le mets a jour dans la variable newDirection (et pas direction pour pas tout bug)
+		if(dir != null) {
+			ghost.setNewDirection(dir);
 		}
 	}
 	

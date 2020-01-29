@@ -16,7 +16,7 @@ public class Entity {
 	protected DoubleProperty yPos = new SimpleDoubleProperty();      //<----> double
 	protected ObjectProperty<Direction> direction = new SimpleObjectProperty<>(); //<----> Direction
 	protected ObjectProperty<Direction> newDirection = new SimpleObjectProperty<>(); //<----> Une nouvelle direction 
-
+	
 	public Entity() {
 		// TODO Auto-generated constructor stub
 	}
@@ -233,6 +233,7 @@ public class Entity {
 		setDirection(newDirection.get());
 		this.newDirection.set(null);
 		return true;
+		
 	}
 	
 	public void updatePosition(ImageView image) {
