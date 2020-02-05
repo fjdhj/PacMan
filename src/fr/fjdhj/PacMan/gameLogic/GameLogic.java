@@ -2,6 +2,8 @@ package fr.fjdhj.PacMan.gameLogic;
 
 import java.util.List;
 
+import fr.fjdhj.PacMan.view.PlayGameMapping;
+import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 
 /*
@@ -85,6 +87,7 @@ public class GameLogic extends Thread{
 		
 
 	}
+	
 	
 	public void ghostGameLogic() {
 		Thread t = new Thread(new Runnable() {

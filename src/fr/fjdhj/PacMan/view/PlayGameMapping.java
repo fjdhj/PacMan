@@ -7,6 +7,7 @@ import fr.fjdhj.PacMan.gameLogic.Direction;
 import fr.fjdhj.PacMan.gameLogic.Wall;
 import fr.fjdhj.PacMan.gameLogic.Entity.Ghost;
 import fr.fjdhj.PacMan.gameLogic.Entity.PacMan;
+import javafx.animation.AnimationTimer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -74,6 +75,22 @@ public class PlayGameMapping {
 		//Mets a Blinky (ImageView) notre image de Blinky
 		//Blinky.setImage(new Image(PlayGameMapping.class.getResourceAsStream("ressource/blinky.png")));
 		
+		
+		AnimationTimer game = new AnimationTimer() {
+
+			@Override
+			public void handle(long now) {
+				PacMan.setLayoutX(player.getXPos().get()-14);
+				PacMan.setLayoutY(player.getYPos().get()-14);
+				
+				Blinky.setLayoutX(BlinkyEntity.getXPos().get()-14);
+				Blinky.setLayoutY(BlinkyEntity.getYPos().get()-14);
+			}
+			
+			
+		};
+		game.start();
+		
 	}
 
 
@@ -129,27 +146,6 @@ public class PlayGameMapping {
 				PacMan.setRotate(newValue.getRotate());				
 			}});
 		
-		//On écoute les coordoonées Y de PacMan et si elles changent :
-		player.getYPos().addListener(new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				//On mets a jour la position Y
-				//NOTE : l'explication du -12 se trouve en haut
-				PacMan.setLayoutY(((double) newValue) - 12);
-				
-			}});
-		
-		//On écoute les coordoonées X de PacMan et si elles changent :
-		player.getXPos().addListener(new ChangeListener<Number>() {
-			
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				//On mets a jour la position X
-				//NOTE : l'explication du -12 se trouve en haut
-				PacMan.setLayoutX(((double) newValue) - 12);
-
-			}});
-		
 		//On écoute le nombre de vie restante a PacMan et si elle change
 		player.getLife().addListener(new ChangeListener<Number>(){
 			@Override
@@ -163,26 +159,6 @@ public class PlayGameMapping {
 			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
 				//On met a jour l'affichage
 				point.setText(arg2.toString());
-			}
-			
-		});
-		
-		BlinkyEntity.getXPos().addListener(new ChangeListener<Number>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number newValue) {
-				Blinky.setLayoutX(((double) newValue)-12);
-				
-			}
-			
-		});
-		
-		BlinkyEntity.getYPos().addListener(new ChangeListener<Number>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				Blinky.setLayoutY(((double) newValue)-12);
-				
 			}
 			
 		});
