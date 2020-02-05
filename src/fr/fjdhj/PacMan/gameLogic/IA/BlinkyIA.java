@@ -6,7 +6,8 @@ import fr.fjdhj.PacMan.gameLogic.Entity.PacMan;
 
 public class BlinkyIA extends IA{
 
-
+	//On a beasoin de savoir si on est a la première vague
+	private boolean firstVague = true;
 	
 	public BlinkyIA(Ghost Blinky, PacMan player, boolean[][] matrice) {
 		setGhost(Blinky);
@@ -25,9 +26,10 @@ public class BlinkyIA extends IA{
 		//On récupère coordonée de Blinky et on convertie en coordonée tuile
 		int x = (int) (ghost.getXPos().get()/14);	
 		int y = (int) (ghost.getYPos().get()/14);
+		
+		//Si on est a la 1ère vague, on va chercher le point hors terrain
 		//On appel notre fonction afin de récupérer les coordonées
 		Direction dir = regularPathFiding(matrice, destx, desty, x, y, ghost.getDirection().get());
-		System.out.println(dir);
 		//Si on récupère pas rien, on le mets a jour dans la variable newDirection (et pas direction pour pas tout bug)
 		if(dir != null) {
 			ghost.setNewDirection(dir);

@@ -182,22 +182,18 @@ public class IA {
 	 */
 	protected Direction regularPathFiding(boolean[][] matrice, int destx, int desty, int x, int y, Direction direction) {
 		int poid[] = new int[4];
+		int profondeur = 50;
 		List<Direction> result = isAnIntersect(matrice, x, y, direction);
 		if(result.size()!=0 && (destx != x || desty != y)) {
 			Direction directionH = horizontalDirectionNeed(x, destx);
 			Direction directionV = verticalDirectionNeed(y, desty);
 			
-			/*-------*/
-			System.out.println(directionH + " "+ directionV+ " "+x+ " "+y);
-			System.out.println(result);
-			/*-------*/
-			
 			//Si la direction horizontal recommandé est dans la list result
 			if(result.contains(directionH))
-				poid[directionH.sortedTab()] = minPathFinding(matrice, destx, desty, x, y, directionH);
+				poid[directionH.sortedTab()] = minPathFinding(matrice, destx, desty, x+directionH.getModifier(), y, directionH, profondeur);
 			//Si la direction vertical recommandé est dans la list result
 			if(result.contains(directionV))
-				poid[directionV.sortedTab()] = minPathFinding(matrice, destx, desty, x, y, directionV);
+				poid[directionV.sortedTab()] = minPathFinding(matrice, destx, desty, x, y+directionV.getModifier(), directionV, profondeur);
 			
 			//Si le tableau ne contient rien, on prend change de direction pour x ou y = celle de la destination
 			//x alignée
@@ -206,14 +202,14 @@ public class IA {
 					for(Direction dir:result) {
 						if(dir.isHorizontal()) {
 							System.out.println(".......0......");
-							poid[dir.sortedTab()]=minPathFinding(matrice, destx, desty, x+dir.getModifier(), y, dir);
+							poid[dir.sortedTab()]=minPathFinding(matrice, destx, desty, x+dir.getModifier(), y, dir, profondeur);
 						}
 					}
 				//y allignée
 				}else if(directionV == null){
 					for(Direction dir:result) {
 						if(!dir.isHorizontal())
-							poid[dir.sortedTab()]=minPathFinding(matrice, destx, desty, x, y+dir.getModifier(), dir);
+							poid[dir.sortedTab()]=minPathFinding(matrice, destx, desty, x, y+dir.getModifier(), dir, profondeur);
 					}
 				}
 			}
@@ -221,9 +217,9 @@ public class IA {
 			if(!result.contains(directionV) || !result.contains(directionH)) {
 				for(Direction dir:result) {
 					if(dir.isHorizontal())
-						poid[dir.sortedTab()] = minPathFinding(matrice, destx, desty, x+dir.getModifier(), y, dir);
+						poid[dir.sortedTab()] = minPathFinding(matrice, destx, desty, x+dir.getModifier(), y, dir, profondeur);
 					else
-						poid[dir.sortedTab()] = minPathFinding(matrice, destx, desty, x, y+dir.getModifier(), dir);
+						poid[dir.sortedTab()] = minPathFinding(matrice, destx, desty, x, y+dir.getModifier(), dir, profondeur);
 				}}
 			
 			//On regarde maintenant la direction qui correspond à la valeur la plus petite
@@ -264,13 +260,16 @@ public class IA {
 	 * @param direction : La direction de la cible
 	 * @return un poid; null si la est atteinte
 	 */
-	private int minPathFinding(boolean[][] matrice, int destx, int desty, int x, int y, Direction direction) {
+	private int minPathFinding(boolean[][] matrice, int destx, int desty, int x, int y, Direction direction, int profondeur) {
 		int poid = 0;
 		List<Direction> result;
+		profondeur--;
 		
 		//Si on est arrivé a destination
 		if(destx == x && desty == y)
 			return poid;
+		if(profondeur==0)
+			return 999999;
 		
 		while((result=isAnIntersect(matrice, x, y, direction)).size()<=1) {
 			//Si on est arrivé a destination
@@ -311,10 +310,10 @@ public class IA {
 		//Si notre list contiens la direction recommandé :
 		//HORIZONTALE
 		if(result.contains(directionH))
-			tabPoid.add(minPathFinding(matrice, destx, desty, x+directionH.getModifier(), y, directionH));
+			tabPoid.add(minPathFinding(matrice, destx, desty, x+directionH.getModifier(), y, directionH, profondeur));
 		//VERTICALE
 		if(result.contains(directionV))
-			tabPoid.add(minPathFinding(matrice, destx, desty, x, y+directionV.getModifier(), directionV));
+			tabPoid.add(minPathFinding(matrice, destx, desty, x, y+directionV.getModifier(), directionV, profondeur));
 		
 		//Si le tableau ne contient rien, on prend change de direction pour x ou y = celle de la destination
 		//x alignée
@@ -322,23 +321,23 @@ public class IA {
 			if(directionH == null) {
 				for(Direction dir:result) {
 					if(dir.isHorizontal())
-						tabPoid.add(minPathFinding(matrice, destx, desty, x+dir.getModifier(), y, dir));
+						tabPoid.add(minPathFinding(matrice, destx, desty, x+dir.getModifier(), y, dir, profondeur));
 				}
 				//y allignée
 			}else if(directionV == null) {
 				for(Direction dir:result) {
 					if(!dir.isHorizontal())
-						tabPoid.add(minPathFinding(matrice, destx, desty, x, y+dir.getModifier(), dir));
+						tabPoid.add(minPathFinding(matrice, destx, desty, x, y+dir.getModifier(), dir, profondeur));
 				}
 			}
 		}
-		//Si elle ne contient aucun des deux, alors il faut tester pour les autres direction la meilleur (aucun cas trouvé mais au cas ou)
+		
 		if(tabPoid.size()==0 ) {
 			for(Direction dir:result) {
 				if(dir.isHorizontal() && direction.isHorizontal())
-					tabPoid.add(minPathFinding(matrice, destx, desty, x+dir.getModifier(), y, dir));
+					tabPoid.add(minPathFinding(matrice, destx, desty, x+dir.getModifier(), y, dir, profondeur));
 				else if(!dir.isHorizontal() && !direction.isHorizontal())
-					tabPoid.add(minPathFinding(matrice, destx, desty, x, y+dir.getModifier(), dir));
+					tabPoid.add(minPathFinding(matrice, destx, desty, x, y+dir.getModifier(), dir, profondeur));
 			}
 		}
 		
