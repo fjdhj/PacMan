@@ -161,6 +161,27 @@ public class PlayGameMapping {
 				point.setText(arg2.toString());
 			}
 			
+		});	
+		
+		BlinkyEntity.getDirection().addListener(new ChangeListener<Direction>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Direction> arg0, Direction arg1, Direction arg2) {
+				switch(arg2) {
+				case DOWN:
+					break;
+				case LEFT:
+					break;
+				case RIGHT:
+					break;
+				case UP:
+					break;
+				default:
+					break;
+				
+				}
+				
+			}		
 		});
 		
 		pan.setOnMouseExited(new EventHandler<MouseEvent>() {
@@ -171,14 +192,7 @@ public class PlayGameMapping {
 				
 			}
 			
-		});
-		
-		
-		
-		
-		
-		
-		
+		});		
 	}
 	
 	public ImageView getImageViewPlayer() {
