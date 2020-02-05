@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
@@ -14,8 +15,14 @@
 
 <AnchorPane fx:id="pan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="434.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.fjdhj.PacMan.view.PlayGameMapping">
    <children>
-      <ImageView fx:id="PacMan" fitHeight="24.0" fitWidth="24.0" layoutX="184.0" layoutY="317.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="Blinky" fitHeight="24.0" fitWidth="24.0" layoutX="184.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="PacMan" fitHeight="24.0" fitWidth="24.0" layoutX="184.0" layoutY="317.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@ressource/PacMan.png" />
+         </image></ImageView>
+      <ImageView fx:id="Blinky" fitHeight="24.0" fitWidth="24.0" layoutX="184.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@ressource/blinky.png" />
+         </image></ImageView>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="434.0" prefWidth="392.0">
          <children>
             <Rectangle height="140.0" stroke="BLACK" strokeType="INSIDE" width="7.0" />

@@ -31,5 +31,7 @@
             </Button>
          </children>
       </AnchorPane>
+      <Button layoutX="454.0" layoutY="754.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" text="SOUND" />
+      <Button layoutX="227.0" layoutY="758.0" mnemonicParsing="false" onAction="#openCredit" text="Credit" />
    </children>
 </AnchorPane>

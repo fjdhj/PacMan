@@ -2,9 +2,11 @@ package fr.fjdhj.PacMan.view;
 
 import java.io.File;
 
+import fr.fjdhj.PacMan.MainClass;
 import fr.fjdhj.PacMan.gameLogic.GameCore;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -16,6 +18,8 @@ public class MainMenuMapping {
 	private Button settingButton;
 	@FXML
 	private Button exitButton;
+	@FXML
+	private MenuItem credit;
 	
 	private Media media;
 	private MediaPlayer mediaPlayer;
@@ -50,6 +54,13 @@ public class MainMenuMapping {
 	public void openSetting() {
 		
 	}
+	
+	@FXML
+	public void openCredit() {
+		MainClass.creditDialog();
+	}
+	
+	
 	
 	/*
 	 * Ferme l'application

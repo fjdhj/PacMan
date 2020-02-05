@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.fjdhj.PacMan.view.CreditMapping">
+   <children>
+      <TabPane prefHeight="600.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+            <Tab text="Untitled Tab">
+               <content>
+                  <WebView fx:id="ressource" prefHeight="200.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+          <Tab text="Credit">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+          <Tab text="Ressources utilisées">
+               <content>
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Text layoutX="5.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I) Image">
+                                 <font>
+                                    <Font size="28.0" />
+                                 </font>
+                              </Text>
+                              <AnchorPane layoutX="20.0" layoutY="36.576171875">
+                                 <children>
+                                    <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="a) PacMan">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Text layoutX="40.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image  : " />
+                                    <Hyperlink fx:id="PacManHyperLink" layoutX="83.0" layoutY="28.0" prefHeight="7.0" prefWidth="134.0" text="PacMan.svg (Wikipedia)" />
+                                    <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="249.0" layoutY="0.423828125" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@ressource/PacMan.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text layoutX="40.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Licence : " />
+                                    <Hyperlink fx:id="PacManHyperLink1" layoutX="83.0" layoutY="48.0" prefHeight="23.0" prefWidth="161.0" text="Domaine Public (Wikipedia)" />
+                                    <Text layoutX="40.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Auteur  :" />
+                                    <Hyperlink fx:id="PacManHyperLink11" layoutX="83.0" layoutY="68.0" prefHeight="23.0" prefWidth="161.0" text="Linuxerist (Wikipedia)" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="20.0" layoutY="148.0">
+                                 <children>
+                                    <Text layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="b) Blinky">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Text layoutX="40.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image  : " />
+                                    <Hyperlink fx:id="PacManHyperLink1" layoutX="83.0" layoutY="28.0" prefHeight="7.0" prefWidth="134.0" text="PacMan.svg (Wikipedia)" />
+                                    <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="249.0" layoutY="0.423828125" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@ressource/PacMan.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text layoutX="40.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Licence : " />
+                                    <Hyperlink fx:id="PacManHyperLink11" layoutX="83.0" layoutY="48.0" prefHeight="23.0" prefWidth="161.0" text="Domaine Public (Wikipedia)" />
+                                    <Text layoutX="40.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Auteur  :" />
+                                    <Hyperlink fx:id="PacManHyperLink111" layoutX="83.0" layoutY="68.0" prefHeight="23.0" prefWidth="161.0" text="Linuxerist (Wikipedia)" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </ScrollPane>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
