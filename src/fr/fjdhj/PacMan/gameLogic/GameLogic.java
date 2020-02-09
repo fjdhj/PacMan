@@ -1,10 +1,12 @@
 package fr.fjdhj.PacMan.gameLogic;
 
 import java.util.List;
+import java.util.Timer;
 
-import fr.fjdhj.PacMan.view.PlayGameMapping;
-import javafx.animation.AnimationTimer;
+import fr.fjdhj.PacMan.gameLogic.IA.IAmod;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 
 /*
  *  Classe qui va gérer le jeu : avancement, si il y a un mur, un phantom,
@@ -17,6 +19,12 @@ public class GameLogic extends Thread{
 	private List<Wall> wall;
 	private boolean run = true;
 	
+	public boolean blinkyBoolTimer = true;
+	public long blinkyTimerStart = 0;
+	public long blinkyTimerEnd = 0;
+	public Timer blinkyTimer;
+
+	
 	public GameLogic(GameCore gameCore, List<Wall> wall) {
 		this.gameCore = gameCore;
 		this.wall = wall;
@@ -24,6 +32,7 @@ public class GameLogic extends Thread{
 	
 	@Override 
 	public void run() {		
+		setTimer();
 		
 		//On déplace de manière parallèle les fantome car il ne vont aps a la même vitesse
 		ghostGameLogic();
@@ -32,7 +41,7 @@ public class GameLogic extends Thread{
 				 while(run) {
 					 //Pause pour limiter la vitesse
 					 try {
-						 Thread.sleep(5);
+						 Thread.sleep(7);
 					 } catch (InterruptedException e) {
 						 e.printStackTrace();
 					 }
@@ -93,9 +102,22 @@ public class GameLogic extends Thread{
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
+				blinkyTimer = gameCore.getBlinky().getIA().timer(gameCore.getBlinky().getIA().TIME_WAVE_1[gameCore.getBlinky().getIA().getRound()]);
 				while(run) {
+						
+					/*if(!gameCore.getBlinky().getIA().getIAmod().equals(IAmod.FRIGHTNED)) {
+					//On démare le timer pour les IA
+						if(blinkyTimer) {
+							start = System.currentTimeMillis();
+							timer = gameCore.getBlinky().getIA().timer();
+							blinkyTimer = false;
+						}
+					}else {
+						
+					}*/
+					//Vitesse du jeu
 					try {
-						Thread.sleep(5);
+						Thread.sleep(7);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -122,4 +144,58 @@ public class GameLogic extends Thread{
 	
 	}
 	 
+	
+	public void setTimer() {
+		//BLINKY JE TE CHOISIE
+		gameCore.getBlinky().getIA().getIAmod().addListener(new ChangeListener<IAmod>() {
+			@Override
+			public void changed(ObservableValue<? extends IAmod> observable, IAmod oldValue, IAmod newValue) {
+				//Si on change de mod, soit le timer est fini, soit on passe en mode fuite
+				//Si on passe en mod fuite
+				if(newValue.equals(IAmod.FRIGHTNED)) {
+					blinkyTimerEnd = System.currentTimeMillis();
+					blinkyTimer.cancel();
+					blinkyTimer.purge();
+					//Stock le temps du timer
+					long time = gameCore.getBlinky().getIA().FRIGHTNED_TIME[gameCore.level];
+					//Si il != -1 car il existe une niveau qui vaut -1
+					if(time!=-1) {
+						blinkyTimer = gameCore.getBlinky().getIA().timer(time);
+					
+					//Si c'est -1, on ne fait faire donc sue demi tour au fantome
+					}else{
+						switch(gameCore.getBlinky().getDirection().get()) {
+						case DOWN:
+							gameCore.getBlinky().getDirection().set(Direction.UP);
+							break;
+						case LEFT:
+							gameCore.getBlinky().getDirection().set(Direction.RIGHT);
+							break;
+						case RIGHT:
+							gameCore.getBlinky().getDirection().set(Direction.LEFT);
+							break;
+						case UP:
+							gameCore.getBlinky().getDirection().set(Direction.DOWN);
+							break;							
+						}}
+							
+				//Si on ne passe pas en mode fuite, dans le cas de Blinky, on peut passer en mode Elroy, 
+				//au quel cas, on ne fait pas demi tour, on ne fait rien
+				//Mais si ce n'est pas le cas :
+				}else {
+					if(!newValue.equals(IAmod.ELROY1) || !newValue.equals(IAmod.ELROY2)) {
+						//Pour changer de mod, soit on redémare une partie, soit un timer est fini
+						if(!gameCore.startLevel) {
+							blinkyTimerStart = System.currentTimeMillis();
+							//Si on est au niveau 1
+							if(gameCore.level==1) {
+								long time = gameCore.getBlinky().getIA().TIME_WAVE_1[gameCore.getBlinky().getIA().getRound()];
+								blinkyTimer = gameCore.getBlinky().getIA().timer(time);
+							}
+						}
+					}
+				}
+				
+			}});
+	}
 }

@@ -80,11 +80,11 @@ public class PlayGameMapping {
 
 			@Override
 			public void handle(long now) {
-				PacMan.setLayoutX(player.getXPos().get()-14);
-				PacMan.setLayoutY(player.getYPos().get()-14);
+				PacMan.setLayoutX(player.getXPos().get()-12);
+				PacMan.setLayoutY(player.getYPos().get()-12);
 				
-				Blinky.setLayoutX(BlinkyEntity.getXPos().get()-14);
-				Blinky.setLayoutY(BlinkyEntity.getYPos().get()-14);
+				Blinky.setLayoutX(BlinkyEntity.getXPos().get()-12);
+				Blinky.setLayoutY(BlinkyEntity.getYPos().get()-12);
 			}
 			
 			

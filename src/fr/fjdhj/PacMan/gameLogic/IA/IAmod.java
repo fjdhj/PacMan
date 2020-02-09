@@ -5,11 +5,9 @@ public enum IAmod {
 	CHASE     ("chase",75,85,95), //L'IA est en mode chase (normal)
 	SCATTER   ("scatter",75,85,95), //L'IA est en mode scatter (va vers un point prédéfinit, attention, blinky dans se mode possède une particulatité)
 	FRIGHTNED ("frightned",50,55,60), //L'IA est en mode frightned (PacMan peut la manger, l'IA tente de fuire)
-	//Seulement pour Blinky, L'IA va juste plus vites
-	CHASE_ELROY1   ("chaseElroy1",80,90,100), 
-	CHASE_ELROY2   ("chaseElroy2",85,95,105),
-	SCATTER_ELROY1 ("scatterElroy1",80,90,100), 
-	SCATTER_ELROY2 ("scatterElroy2",85,95,105);
+	//Seulement pour Blinky, L'IA va juste plus vites, si il est dans ce mode, il poursuivra toujours PacMan
+	ELROY1 ("scatterElroy1",80,90,100), 
+	ELROY2 ("scatterElroy2",85,95,105);
 	
 	private final String mode;
 	private final int speed1; //vitesse au niveau 1 (en %)

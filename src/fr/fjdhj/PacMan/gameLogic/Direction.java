@@ -36,8 +36,8 @@ public enum Direction{
 
 	/**
 	 * 0 : UP
-	 * 1 : DOWN
-	 * 2 : LEFT
+	 * 1 : LEFT
+	 * 2 : DOWN
 	 * 3 : RIGHT
 	 * @return -1 si BUGGG
 	 * 	
@@ -46,9 +46,9 @@ public enum Direction{
 		switch(direction) {
 		case "up":
 			return 0;
-		case "down":
-			return 1;
 		case "left":
+			return 1;
+		case "down":
 			return 2;
 		case "right":
 			return 3;

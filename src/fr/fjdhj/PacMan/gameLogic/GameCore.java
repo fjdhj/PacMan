@@ -20,6 +20,8 @@ public class GameCore {
 	private PacMan player;
 	private List<Wall> wall;
 	public PlayGameMapping controlleur;
+	public int level = 1;
+	public boolean startLevel = false;
 	
 	//Note : créer avec la fonction addGhost
 	private Ghost Blinky;
@@ -90,7 +92,7 @@ public class GameCore {
 		boolean[][] matrice = IA.createMatrice(wall, 28, 31);
 		
 		//Blinky : le phantome rouge
-		BlinkyIA blinkyIA = new BlinkyIA(Blinky, player, matrice);
+		BlinkyIA blinkyIA = new BlinkyIA(Blinky, player, matrice, 1);
 		Blinky.setIA(blinkyIA);
 		
 		//On appel notre GameCore
