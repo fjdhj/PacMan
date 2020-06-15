@@ -69,11 +69,11 @@ public class PlayGameMapping {
 	@FXML
 	public void initialize(){	
 		//Mets a PacMan (ImageView) notre image de PacMan
-		//PacMan.setImage(new Image(PlayGameMapping.class.getResourceAsStream("ressource/PacMan.png")));
+		PacMan.setImage(new Image(PlayGameMapping.class.getResourceAsStream("ressource/PacMan.png")));
 		PacMan.setRotate(180);
 		point.setText("0");
 		//Mets a Blinky (ImageView) notre image de Blinky
-		//Blinky.setImage(new Image(PlayGameMapping.class.getResourceAsStream("ressource/blinky.png")));
+		Blinky.setImage(new Image(PlayGameMapping.class.getResourceAsStream("ressource/test.png")));
 		
 		
 		AnimationTimer game = new AnimationTimer() {
