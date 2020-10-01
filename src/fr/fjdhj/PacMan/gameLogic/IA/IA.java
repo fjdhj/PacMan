@@ -25,19 +25,19 @@ public class IA {
 	 * Les temps sont en milliseconde
 	 */
 	protected int round =0;
-	public final long[] TIME_WAVE_1 = {7000,20000,7000,20000,5000,20000,5000,-1};
-	public final long[] FRIGHTNED_TIME = {6000,5000,4000,3000,2000,5000,2000,2000,1000,5000,2000,1000,1000,3000,1000,1000,-1,1000};
+	public final static long[] TIME_WAVE_1 = {7000,20000,7000,20000,5000,20000,5000,-1};
+	public final static long[] FRIGHTNED_TIME = {6000,5000,4000,3000,2000,5000,2000,2000,1000,5000,2000,1000,1000,3000,1000,1000,-1,1000};
 	
 	public IA(){}
 
 	
 	/**
-	 * Regarde si l'entité peut avancer
+	 * Regarde si l'entitï¿½ peut avancer
 	 * @param matrice : La matrice du jeu
-	 * @param x : coordonées x de l'entitée
-	 * @param y : coordonées y de l'entitée
-	 * @param direction : direction de l'entitée
-	 * @return true si l'entité peut avancé; autrement renvoie false
+	 * @param x : coordonï¿½es x de l'entitï¿½e
+	 * @param y : coordonï¿½es y de l'entitï¿½e
+	 * @param direction : direction de l'entitï¿½e
+	 * @return true si l'entitï¿½ peut avancï¿½; autrement renvoie false
 	 */
 	private boolean canGoForward(boolean[][] matrice, int x, int y, Direction direction) {
 		if(direction.isHorizontal()) {
@@ -53,19 +53,19 @@ public class IA {
 	
 	
 	/**
-	 * Regarde si l'entitée se trouve a une intersection
+	 * Regarde si l'entitï¿½e se trouve a une intersection
 	 * 
 	 * @param matrice : La matrice du jeu (tuile)
-	 * @param x : Les coordonée x de l'entité (tuile)
-	 * @param y : Les coordonée y de l'entité (tuile)
-	 * @param direction : La direction actuel de l'entité
+	 * @param x : Les coordonï¿½e x de l'entitï¿½ (tuile)
+	 * @param y : Les coordonï¿½e y de l'entitï¿½ (tuile)
+	 * @param direction : La direction actuel de l'entitï¿½
 	 * @return Une list, vide si aucun changement de direction est possible,
-	 * 			autrement contient les nouvels direction que l'entité peut prendre
+	 * 			autrement contient les nouvels direction que l'entitï¿½ peut prendre
 	 */
 	private List<Direction> isAnIntersect(boolean[][] matrice, int x, int y, Direction direction) {
 		List<Direction> result = new ArrayList<Direction>();
 		
-		//Si on se déplace horizontalement
+		//Si on se dï¿½place horizontalement
 		if(direction.isHorizontal()) {
 			//Si il y a une tuile libre au dessu (=false)
 			if(!matrice[x][y-1])
@@ -73,7 +73,7 @@ public class IA {
 			//Si il y a une tuile libre en dessou (=false)
 			if(!matrice[x][y+1])
 				result.add(Direction.DOWN);
-			//Si c'est une intersection (changement de direction possible) et que l'IA peut garder la même direction 
+			//Si c'est une intersection (changement de direction possible) et que l'IA peut garder la mï¿½me direction 
 			if(result.size()!=0 && !matrice[x+direction.getModifier()][y])
 				result.add(direction);
 		}else {
@@ -83,7 +83,7 @@ public class IA {
 			//Si il y a une tuile libre a droite (=false)
 			if(!matrice[x+1][y])
 				result.add(Direction.RIGHT);
-			//Si c'est une intersection (changement de direction possible) et que l'IA peut garder la même direction 
+			//Si c'est une intersection (changement de direction possible) et que l'IA peut garder la mï¿½me direction 
 			if(result.size()!=0 && !matrice[x][y+direction.getModifier()])
 				result.add(direction);
 		}
@@ -105,7 +105,7 @@ public class IA {
 	
 	/**
 	 * 
-	 * Permet de créer un matrice, nécessaires pour l'utilisation des algorythmes des fantômes
+	 * Permet de crï¿½er un matrice, nï¿½cessaires pour l'utilisation des algorythmes des fantï¿½mes
 	 * 
 	 * @param wall La liste des murs
 	 * @param x la dimention x de la matrice (= largeur/14)
@@ -114,8 +114,8 @@ public class IA {
 	public static boolean[][] createMatrice(List<Wall> listWall, int dimx, int dimy) {
 		boolean[][] matrice = new boolean[dimx][dimy];
 		
-		//On simule 2 point, a chaque extrémité droite de la tuile, si un point est dans un mur, alors la tuile de gauche et de droite seras considérer
-		//occupé par le mur et vaudra true, sinon celle de droite seras considérer comme vide et prendra comme valeur false.
+		//On simule 2 point, a chaque extrï¿½mitï¿½ droite de la tuile, si un point est dans un mur, alors la tuile de gauche et de droite seras considï¿½rer
+		//occupï¿½ par le mur et vaudra true, sinon celle de droite seras considï¿½rer comme vide et prendra comme valeur false.
 		for(double indexY=0; indexY<dimy*14;indexY+=14) {
 			for(double indexX=0; indexX<=dimx*14;indexX+=14) {
 				int x = (int) (indexX/14);
@@ -153,10 +153,10 @@ public class IA {
 	}
 	
 	/**
-	 * Donne la direction horizontal recommandé 
-	 * @param x : coordonnée x (tuile)
-	 * @param destx : coordonnée x de la cible (tuile)
-	 * @return Direction, null si elles ont la même coordonée x
+	 * Donne la direction horizontal recommandï¿½ 
+	 * @param x : coordonnï¿½e x (tuile)
+	 * @param destx : coordonnï¿½e x de la cible (tuile)
+	 * @return Direction, null si elles ont la mï¿½me coordonï¿½e x
 	 */
 	private Direction horizontalDirectionNeed(int x, int destx) {
 		
@@ -170,10 +170,10 @@ public class IA {
 	}
 	
 	/**
-	 * Donne la direction vertical recommandé 
-	 * @param y : coordonnée y (tuile)
-	 * @param desty : coordonnée y de la cible (tuile)
-	 * @return Direction, null si elles ont la même coordonée y
+	 * Donne la direction vertical recommandï¿½ 
+	 * @param y : coordonnï¿½e y (tuile)
+	 * @param desty : coordonnï¿½e y de la cible (tuile)
+	 * @return Direction, null si elles ont la mï¿½me coordonï¿½e y
 	 */
 	private Direction verticalDirectionNeed(int y, int desty) {
 		if((desty-y)>0)
@@ -184,15 +184,15 @@ public class IA {
 	}
 	
 	/**
-	 * Détermine la meilleur direction a prendre
+	 * Dï¿½termine la meilleur direction a prendre
 	 * 
 	 * @param matrice : Le jeu
-	 * @param destx : Les coordonées x de la cible
-	 * @param desty : Les coordonées y de la cible
-	 * @param x : Les coordonées x de l'entité
-	 * @param y : Les coordonées y de l'entité
+	 * @param destx : Les coordonï¿½es x de la cible
+	 * @param desty : Les coordonï¿½es y de la cible
+	 * @param x : Les coordonï¿½es x de l'entitï¿½
+	 * @param y : Les coordonï¿½es y de l'entitï¿½
 	 * @param direction : La direction de la cible
-	 * @return une direction; null si la cible ne se trouve pas à une intersection
+	 * @return une direction; null si la cible ne se trouve pas ï¿½ une intersection
 	 */
 	protected Direction regularPathFiding(boolean[][] matrice, int destx, int desty, int x, int y, Direction direction) {
 		if(!canGoForward(matrice, x, y, direction))

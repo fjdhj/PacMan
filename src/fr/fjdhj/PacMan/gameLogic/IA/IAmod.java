@@ -3,7 +3,7 @@ package fr.fjdhj.PacMan.gameLogic.IA;
 public enum IAmod {
 	
 	CHASE     ("chase",75,85,95), //L'IA est en mode chase (normal)
-	SCATTER   ("scatter",75,85,95), //L'IA est en mode scatter (va vers un point prédéfinit, attention, blinky dans se mode possède une particulatité)
+	SCATTER   ("scatter",75,85,95), //L'IA est en mode scatter (va vers un point prï¿½dï¿½finit, attention, blinky dans se mode possï¿½de une particulatitï¿½)
 	FRIGHTNED ("frightned",50,55,60), //L'IA est en mode frightned (PacMan peut la manger, l'IA tente de fuire)
 	//Seulement pour Blinky, L'IA va juste plus vites, si il est dans ce mode, il poursuivra toujours PacMan
 	ELROY1 ("scatterElroy1",80,90,100), 
@@ -22,12 +22,13 @@ public enum IAmod {
 		
 	}
 
+	@Override
 	public String toString() {
 		return mode;
 	}
 	
 	/*
-	 * NOTES : La vitesse des phantome dans le tunel est égales à : (speed//2)+3
+	 * NOTES : La vitesse des phantome dans le tunel est ï¿½gales ï¿½ : (speed//2)+3
 	 */
 	
 	public int getSpeed(int level) {

@@ -23,10 +23,10 @@ public class GameCore {
 	public int level = 1;
 	public boolean startLevel = false;
 	
-	//Note : créer avec la fonction addGhost
+	//Note : crï¿½er avec la fonction addGhost
 	private Ghost Blinky;
 	
-	//Note : pour pouvoir y accéder depuis notre Thread dans la fonction startGame()
+	//Note : pour pouvoir y accï¿½der depuis notre Thread dans la fonction startGame()
 	private GameCore gameCore = this;
 	private GameLogic gameLogic;
 	
@@ -37,7 +37,7 @@ public class GameCore {
 	 */
 	
 	/**
-	 * Constructeur par défault
+	 * Constructeur par dï¿½fault
 	 * @param startLife
 	 * @param Direction
 	 * @param player
@@ -49,7 +49,7 @@ public class GameCore {
 	}
 	
 	/**
-	 * Par défault :- startLife vaut 3
+	 * Par dï¿½fault :- startLife vaut 3
 	 * 				- startDirection vaut LEFT
 	 */
 	public GameCore() {
@@ -65,30 +65,30 @@ public class GameCore {
 	 */
 	
 	/**
-	 * Démarre la partie
+	 * Dï¿½marre la partie
 	 */	
 	public void startGame() {
 		Blinky = new Ghost(0,0,Direction.LEFT);
 		
-		//On charge notre jeu et on récupère le controlleur
+		//On charge notre jeu et on rï¿½cupï¿½re le controlleur
 		controlleur = (PlayGameMapping) MainClass.initScene(MainClass.class.getResource("view/playGame.fxml"));
 		//On innitialise notre KeyListeneur
 		initKeyListener();	
 		
-		//On fournie a notre controlleur nos objet et on récupère les murs
+		//On fournie a notre controlleur nos objet et on rï¿½cupï¿½re les murs
 		wall = controlleur.setEntityAndGetWall(player, Blinky);
 		
-		//On créer nos Phantome et leur IA corespondante via la fonction
+		//On crï¿½er nos Phantome et leur IA corespondante via la fonction
 		//addGhost();
 		
-		//On met a jour nos coordonées en fonction de l'image view
+		//On met a jour nos coordonï¿½es en fonction de l'image view
 		player.updatePosition(controlleur.getImageViewPlayer());
 		Blinky.updatePosition(controlleur.getImageViewBlinky());
 		
 		//On ajoute nos listeneur pour l'interface graphique
 		controlleur.addListener();
 		
-		//La carte se divise en tuile de 14x14, pour l'IA, il faut convertire les murs en tuils accéssible ou non
+		//La carte se divise en tuile de 14x14, pour l'IA, il faut convertire les murs en tuils accï¿½ssible ou non
 		boolean[][] matrice = IA.createMatrice(wall, 28, 31);
 		
 		//Blinky : le phantome rouge
@@ -97,7 +97,7 @@ public class GameCore {
 		
 		//On appel notre GameCore
 		GameLogic gameLogic = new GameLogic(gameCore, wall);
-		//On démare le Thread principale
+		//On dï¿½mare le Thread principale
 		gameLogic.start();
 		
 
@@ -117,8 +117,9 @@ public class GameCore {
 	 */
 	
 	private void initKeyListener() {
-		//On créer un listeneur qui va écouter notre clavier
+		//On crï¿½er un listeneur qui va ï¿½couter notre clavier
 		controlleur.pan.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+			@Override
 			@SuppressWarnings("incomplete-switch")
 			public void handle(KeyEvent arg0) {
 				switch (arg0.getCode()) {

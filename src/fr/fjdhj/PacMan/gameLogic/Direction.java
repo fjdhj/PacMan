@@ -18,6 +18,7 @@ public enum Direction{
 		this.horizontal=horizontal;
 	}
 	
+	@Override
 	public String toString() {
 		return direction;
 	}
