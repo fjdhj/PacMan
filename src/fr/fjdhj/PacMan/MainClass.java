@@ -18,14 +18,16 @@ public class MainClass extends Application {
 	private static AnchorPane conteneurPrincipal;
 	private final HostServices services = this.getHostServices();
 	
+	private final static boolean VERBOSE = true;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		
 		
 		stagePrincipal = primaryStage;
-		//Nom de la fenêtre
+		//Nom de la fenï¿½tre
 		stagePrincipal.setTitle("PacMan");	
-		//Resout bug affichage au début d'une partie ?
+		//Resout bug affichage au dï¿½but d'une partie ?
 		stagePrincipal.requestFocus();
 		
 		//Charge le fichier FXML pour afficher le contenu, ici mainMenu
@@ -48,7 +50,7 @@ public class MainClass extends Application {
 	
 	/**
 	 * Change la scene principale
-	 * @param path : Le chemin d'accées au fichier FXML
+	 * @param path : Le chemin d'accï¿½es au fichier FXML
 	 * @return Object : Retourn le controleur
 	 */
 	public static Object initScene(URL path) {
@@ -57,7 +59,7 @@ public class MainClass extends Application {
 		loader.setLocation(path);
 		try {
 			conteneurPrincipal = (AnchorPane) loader.load();
-			//Création scene principale
+			//Crï¿½ation scene principale
 			Scene scene = new Scene(conteneurPrincipal);
 			//Ajout de la scene dans le stage
 			stagePrincipal.setScene(scene);
@@ -78,13 +80,13 @@ public class MainClass extends Application {
 	        loader.setLocation(MainClass.class.getResource("view/Credit.fxml"));
 	        AnchorPane page = (AnchorPane) loader.load();
 	        
-	        // Création d'un nouveau Stage qui sera dépendant du Stage principal
+	        // Crï¿½ation d'un nouveau Stage qui sera dï¿½pendant du Stage principal
 	        Stage stageDialogue = new Stage();
 	        stageDialogue.setTitle("Credit");
 	        stageDialogue.initModality(Modality.WINDOW_MODAL);
 	        
-	        //Avec cette instruction, notre fenêtre modifiée sera modale
-	        //par rapport à notre stage principal
+	        //Avec cette instruction, notre fenï¿½tre modifiï¿½e sera modale
+	        //par rapport ï¿½ notre stage principal
 	        stageDialogue.initOwner(stagePrincipal);
 	        Scene scene = new Scene(page);
 	        stageDialogue.setScene(scene);
@@ -102,5 +104,14 @@ public class MainClass extends Application {
 	
 	public void openInBrowser(String URI) {
 		services.showDocument(URI);
+	}
+	
+	/**
+	 * En fonction de la variable boolean VERBOSE, afficher ou non le messages
+	 * @param str Message a afficher
+	 */
+	public static void verbose(String str) {
+		if(VERBOSE)
+			System.out.println(str);
 	}
 }

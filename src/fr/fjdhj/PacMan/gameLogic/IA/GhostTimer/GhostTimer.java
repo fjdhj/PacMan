@@ -5,6 +5,8 @@ import java.util.TimerTask;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import fr.fjdhj.PacMan.MainClass;
+
 public class GhostTimer implements Runnable{
 	private Thread GhostTimerThread;
 	private Thread timerThread;
@@ -40,7 +42,7 @@ public class GhostTimer implements Runnable{
 		timerThread = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				System.out.println("[Timer] Lancement pour : "+time);
+				MainClass.verbose("[Timer] Lancement pour : "+time);
 				do {
 					long start = System.currentTimeMillis();
 					try {Thread.sleep(time);} catch (InterruptedException e) {e.printStackTrace();}
@@ -48,17 +50,17 @@ public class GhostTimer implements Runnable{
 					if(stop != -1l) {
 						time = time - (stop - start);
 						stop = -1l;
-						System.out.println("[Timer] Pause détecter, temps restant : "+time);
+						MainClass.verbose("[Timer] Pause détecter, temps restant : "+time);
 					}else {
-						System.out.println("[Timer] Aucune pause détecter");
+						MainClass.verbose("[Timer] Aucune pause détecter");
 						time = 0;
 					}
 					
 					if(inPause) {
 						synchronized (timerThread) {
-							System.out.println("[Timer] Attente de la fin de la pause via wait()");
+							MainClass.verbose("[Timer] Attente de la fin de la pause via wait()");
 							try {timerThread.wait();} catch (InterruptedException e) {e.printStackTrace();}
-							System.out.println("[Timer] Fin de la pause détecter via notify()");
+							MainClass.verbose("[Timer] Fin de la pause détecter via notify()");
 						}
 					}
 				}while(time != 0);
@@ -110,21 +112,20 @@ public class GhostTimer implements Runnable{
 						
 						long pauseStart = System.currentTimeMillis();
 						inPause = true;
-						System.out.println("[Interuption Timer] Timer interompue pendant "+pauseTime);
+						MainClass.verbose("[Interuption Timer] Timer interompue pendant "+pauseTime);
 		
 						Timer interuptTimer = new Timer();
 						interuptTimer.schedule(new TimerTask() {
 							@Override
 							public void run() {
 								synchronized (ghostTimer) {
-									System.out.println(pauseTime);
 									if(pauseTime == 0l) {
-										System.out.println("[Interuption Timer] Pause fini");
+										MainClass.verbose("[Interuption Timer] Pause fini");
 										synchronized (timerThread) {
 											timerThread.notify();
 										}
 									}else {
-										System.out.println("[Interuption Timer] Pause pas fini");
+										MainClass.verbose("[Interuption Timer] Pause non fini, method pause() a été appelé");
 										pauseTime = pauseTime-(pauseStop - pauseStart);
 									}
 									inPause = false;
@@ -134,7 +135,6 @@ public class GhostTimer implements Runnable{
 								}
 							}
 						}, pauseTime);
-						System.out.println("Reset de pauseTime");
 						pauseTime = 0l;
 						pauseTimerLock.unlock();
 					}
@@ -153,6 +153,7 @@ public class GhostTimer implements Runnable{
 	 * @return 
 	 */
 	public void pause(long millis) {
+		MainClass.verbose("[GhosTimer.Pause] Nouvelle pause de : " + Long.toString(millis));
 		pauseTimerLock.lock();
 		pauseTime = millis;
 		pauseStop = System.currentTimeMillis();
@@ -166,7 +167,6 @@ public class GhostTimer implements Runnable{
 	@Override
 	public void run() {
 		GhostTimerThread = Thread.currentThread();
-		GhostTimerThread.setDaemon(true);
 		
 		//Pour tester
 		time = 2000l;
@@ -182,10 +182,10 @@ public class GhostTimer implements Runnable{
 		t.start();
 		
 		Thread.sleep(1000);
-		System.out.println("[Main] Lancement pause");
+		MainClass.verbose("[Main] Lancement pause");
 		gtimer.pause(5000l);
 		Thread.sleep(1000);
-		System.out.println("[Main] Lancement pause");
+		MainClass.verbose("[Main] Lancement pause");
 		gtimer.pause(5000l);
 	}
 	
