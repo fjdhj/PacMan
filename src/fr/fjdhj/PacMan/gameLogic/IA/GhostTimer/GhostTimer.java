@@ -6,6 +6,9 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import fr.fjdhj.PacMan.MainClass;
+import fr.fjdhj.PacMan.gameLogic.GameCore;
+import fr.fjdhj.PacMan.gameLogic.Entity.Ghost;
+import fr.fjdhj.PacMan.gameLogic.IA.IA;
 
 public class GhostTimer implements Runnable{
 	private Thread GhostTimerThread;
@@ -24,11 +27,17 @@ public class GhostTimer implements Runnable{
 	private long stop = -1l;
 	private int levelInWave = 0;
 	
-	public GhostTimer() {
+	private Ghost blinky;
+	
+	public GhostTimer(GameCore core) {
+		blinky = core.getBlinky();
 		interuptTimer();
 	}
 	
 	
+	/**
+	 * C'est le maitre du temps mais peut aussi attendre en cas de pause !!
+	 */
 	private void timer() {
 		/*
 		 * Ici il faut prendre en compte plusieur cas :
@@ -44,18 +53,22 @@ public class GhostTimer implements Runnable{
 			public void run() {
 				MainClass.verbose("[Timer] Lancement pour : "+time);
 				do {
+					//On stock le temps de d�part
 					long start = System.currentTimeMillis();
 					try {Thread.sleep(time);} catch (InterruptedException e) {e.printStackTrace();}
 					
+					//Si il y a une pause
 					if(stop != -1l) {
 						time = time - (stop - start);
 						stop = -1l;
 						MainClass.verbose("[Timer] Pause détecter, temps restant : "+time);
+					//Sinan
 					}else {
 						MainClass.verbose("[Timer] Aucune pause détecter");
+						//On reset time
 						time = 0;
 					}
-					
+					//Si il y a une pause on attend la notify de fin de pause
 					if(inPause) {
 						synchronized (timerThread) {
 							MainClass.verbose("[Timer] Attente de la fin de la pause via wait()");
@@ -64,8 +77,18 @@ public class GhostTimer implements Runnable{
 						}
 					}
 				}while(time != 0);
-				new GhostModTask(GhostTimerThread).run();
+				/*----------------TACHE----------------*/
+				//On fini par lancer la tache
+				try {
+					blinky.getIA().changeMode();
+				} catch (Exception e) {System.err.println("[ExecutionTacheTimer] Erreur dans la tache"); e.printStackTrace();}
+				System.out.println("[ExecutionTacheTimer] Execution finie");
+				//On relance le Thread controleur
+				synchronized (GhostTimerThread) {
+					GhostTimerThread.notify();
 				
+				}
+				/*----------------FIN TACHE----------------*/
 			}
 		});
 		
@@ -85,7 +108,10 @@ public class GhostTimer implements Runnable{
 		
 	}
 	
-	public void interuptTimer() {
+	/**
+	 * C'est le maitre de l'interuption : il 'interomp" lui et le timer pour pouvoir faire une pause
+	 */
+	private void interuptTimer() {
 		interuptTimerThread = new Thread(new Runnable() {
 			
 			@Override
@@ -121,6 +147,9 @@ public class GhostTimer implements Runnable{
 								synchronized (ghostTimer) {
 									if(pauseTime == 0l) {
 										MainClass.verbose("[Interuption Timer] Pause fini");
+										//On repasse tous les fantomes en mode normal
+										blinky.getIA().transferStoreModToCurent();
+										
 										synchronized (timerThread) {
 											timerThread.notify();
 										}
@@ -146,6 +175,7 @@ public class GhostTimer implements Runnable{
 		
 		
 	}
+	
 	/**
 	 * Mets sur pause le timer, si le timer étais déjà sur pause, alors 
 	 * le timer seras mis sur pause le temps de la nouvelle valeur (si celle si est supèrieur ou égale a la précédente)
@@ -163,30 +193,24 @@ public class GhostTimer implements Runnable{
 		pauseTimerLock.unlock();
 		
 	}
-
+	
+	/**
+	 * C'est le controleur du timer, il le relanceras tant que n�cessaire 
+	 */
 	@Override
 	public void run() {
 		GhostTimerThread = Thread.currentThread();
 		
-		//Pour tester
-		time = 2000l;
-		this.timer();
-		time = 10000l;
-		this.timer();		
-	}
-	
-	
-	public static void main(String[] args) throws InterruptedException {
-		GhostTimer gtimer = new GhostTimer();
-		Thread t = new Thread(gtimer);
-		t.start();
-		
-		Thread.sleep(1000);
-		MainClass.verbose("[Main] Lancement pause");
-		gtimer.pause(5000l);
-		Thread.sleep(1000);
-		MainClass.verbose("[Main] Lancement pause");
-		gtimer.pause(5000l);
+		//C'est a dire tant que l'utilisation du timer est utile donc tant que les fantomes peuvent changer de mode
+		while (time != -1) {
+			//On choisie la nouvelle valeur du temps et on lance le timer
+			time = IA.TIME_WAVE_1[levelInWave];
+			this.timer();
+			
+			levelInWave++; //Il faut passer au niveau suivant pour la prochain timer
+			
+			
+		}
 	}
 	
 	/*

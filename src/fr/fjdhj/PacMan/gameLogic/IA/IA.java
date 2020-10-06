@@ -203,23 +203,30 @@ public class IA {
 			x+=direction.getModifier();
 		else
 			y+=direction.getModifier();
+		//On récupère les directions possible (demi tour exclue)
 		List<Direction> result = isAnIntersect(matrice, x, y, direction);
 		if(result.size()!=0  && (destx != x || desty != y) && ghost.getNewDirection().get() == null) {
+			//Si on a qu'un seul direction on la prend
 			if(result.size()==1)
 				return result.get(0);
 			double[] dist = new double[4];
 			System.out.println("-----------------------------\n"+result.size());
+			//On parcour notre résultat
 			for(Direction dir : result) {
+				//Si c'est horizontale
 				//Distance = x a tester**2 + y a tester**2 
 				if(dir.isHorizontal()) {
 					//x a tester = abs(destx - (x+dir.getModifier()));
 					//y a tester = abs(desty - y);
 					System.out.println(Math.pow(destx - (x+dir.getModifier()), 2) + Math.pow(desty-y, 2));
+					//On stock la distance entre pacman et le fantome
 					dist[dir.sortedTab()] = Math.pow(destx - (x+dir.getModifier()), 2) + Math.pow(desty-y, 2);
 				}else {
+					//Si c'est verticale
 					//x a tester = abs(destx - x);
 					//y a tester = abs(desty - (y+dir.getModifier()));
 					System.out.println(Math.pow(destx - x, 2) + Math.pow(desty-(y+dir.getModifier()), 2));
+					//On stock la distance entre pacman et le fantome
 					dist[dir.sortedTab()] = Math.pow(destx - x, 2) + Math.pow(desty-(y+dir.getModifier()), 2);
 					
 				}
@@ -227,6 +234,7 @@ public class IA {
 			int value = 9999;
 			double test = 9999;
 			System.out.println(dist[0] + " " + dist[1] + " " +dist[2] + " " +dist[3]);
+			//On prends l'index pour dist[index] la plus petite
 			for(int index=0; index<4; index++) {
 				if(dist[index]<test && dist[index]!=0) {
 					value = index;
@@ -234,7 +242,7 @@ public class IA {
 			}}
 			
 			System.out.println(test);
-			
+			//On retourn la valeur pour laquelle value correspond c'est a dire dist[index] la plus petite
 			if(value == 0)
 				return Direction.UP;
 			if(value == 1)
@@ -251,87 +259,71 @@ public class IA {
 		
 	}
 	
-	public void mainIA() {
-		
-	}
+	public void mainIA() {}
 	
 	/**
-	 * @return 
+	 * Change de mode l'IA selon le mode actuelle
+	 * @throws Exception si IAmod a pour valeur FRIGHTNED
 	 * 
 	 */
-	public Timer timer(long time) {
-		if(time!=-1) {
-			Timer timer = new Timer();
-			
-			timer.schedule(new TimerTask() {
-				@Override
-				public void run() {
-					System.out.println("timer good");
-					if(!mod.get().equals(IAmod.FRIGHTNED))
-						round++;
-					
-					switch(mod.get()) {
-					case CHASE:
-						mod.set(IAmod.SCATTER);
-						break;
-					case FRIGHTNED:
-						mod.set(storMod);
-						break;
-					case SCATTER:
-						mod.set(IAmod.CHASE);
-						break;
-					case ELROY1:
-						break;
-					case ELROY2:
-						break;
-					
-					}
-					switch(ghost.getDirection().get()) {
-					case DOWN:
-						ghost.setDirection(Direction.UP);
-						break;
-					case LEFT:
-						ghost.setDirection(Direction.RIGHT);
-						break;
-					case RIGHT:
-						ghost.setDirection(Direction.LEFT);
-						break;
-					case UP:
-						ghost.setDirection(Direction.DOWN);
-						break;
-					default:
-						break;
-					
-					}
-					
-				}
-				
-			}, time);
-			return timer;
+	@SuppressWarnings("incomplete-switch")
+	public void changeMode() throws Exception {
+
+		System.out.println("timer good");
+		//si FRIGHTNED alors erreur
+		if(mod.get().equals(IAmod.FRIGHTNED))
+			throw new Exception("changeMode() can't be used when IAmod is FRIGHTNED");
+		
+		switch(mod.get()) {
+		case CHASE:
+			mod.set(IAmod.SCATTER);
+			break;
+		case SCATTER:
+			mod.set(IAmod.CHASE);
+			break;
+		
 		}
-		return null;
+		switch(ghost.getDirection().get()) {
+		case DOWN:
+			ghost.setDirection(Direction.UP);
+			break;
+		case LEFT:
+			ghost.setDirection(Direction.RIGHT);
+			break;
+		case RIGHT:
+			ghost.setDirection(Direction.LEFT);
+			break;
+		case UP:
+			ghost.setDirection(Direction.DOWN);
+			break;
+		
+		}
 	}
 
 	/* ------------------------------------------------
-	 * GETTEUR/SETTEUR
+	 * GETTEUR/SETTEUR/TRANSFER
 	 * ------------------------------------------------
 	 */
-	public Ghost getGhost() {return ghost;}
-	public void setGhost(Ghost ghost) {this.ghost = ghost;}
+	public synchronized Ghost getGhost() {return ghost;}
+	public synchronized void setGhost(Ghost ghost) {this.ghost = ghost;}
 
-	public PacMan getPlayer() {return player;}
-	public void setPlayer(PacMan player) {this.player = player;}
+	public synchronized PacMan getPlayer() {return player;}
+	public synchronized void setPlayer(PacMan player) {this.player = player;}
 	
-	public boolean[][] getMatrice() {return matrice;}
-	public void setMatrice(boolean[][] matrice) {this.matrice = matrice;}
+	public synchronized boolean[][] getMatrice() {return matrice;}
+	public synchronized void setMatrice(boolean[][] matrice) {this.matrice = matrice;}
 	
-	public int getLevel() {return level;}
-	public void setLevel(int level) {this.level=level;} 
+	public synchronized int getLevel() {return level;}
+	public synchronized void setLevel(int level) {this.level=level;} 
 	
-	public ObjectProperty<IAmod> getIAmod() {return mod;}
-	public void setIAmod(IAmod mod) {this.mod.set(mod);}
+	public synchronized ObjectProperty<IAmod> getIAmod() {return mod;}
+	public synchronized void setIAmod(IAmod mod) {this.mod.set(mod);}
 	
-	public int getRound() {return round;}
+	public synchronized IAmod getIAStoreMod() {return storMod;}
+	public synchronized void setIAStoreMod(IAmod storMod) {this.storMod = storMod;}
+	public synchronized void transferStoreModToCurent() {this.mod.set(storMod); this.storMod = null;}
+	
+	public synchronized int getRound() {return round;}
 
 	
 }

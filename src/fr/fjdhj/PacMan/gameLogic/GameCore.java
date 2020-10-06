@@ -26,6 +26,7 @@ public class GameCore {
 	//Note : cr�er avec la fonction addGhost
 	private Ghost Blinky;
 	
+	
 	//Note : pour pouvoir y acc�der depuis notre Thread dans la fonction startGame()
 	private GameCore gameCore = this;
 	private GameLogic gameLogic;
