@@ -16,10 +16,10 @@ public class CreditMapping {
 	
 	@FXML
 	private void initialize() throws MalformedURLException {
-		WebEngine webEngine = ressource.getEngine();
+		/*WebEngine webEngine = ressource.getEngine();
 		JSObject jsobj = (JSObject) webEngine.executeScript("window");
 		jsobj.setMember("app", new MainClass());
-		webEngine.load(new File("src/fr/fjdhj/PacMan/view/ressource/Credit.html").toURI().toURL().toString());
+		webEngine.load(new File("src/fr/fjdhj/PacMan/view/ressource/Credit.html").toURI().toURL().toString());*/
 	}
 	
 	public CreditMapping() {}

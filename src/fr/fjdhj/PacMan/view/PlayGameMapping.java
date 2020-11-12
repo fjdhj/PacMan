@@ -44,8 +44,8 @@ public class PlayGameMapping {
 	//			|		|
 	//			---------
 	//
-	// x et y sont les coordonées de l'image view. Or on veut qu'elle point au centre de celle ci
-	// x' et y' sont les coordonées de M' : x' = x+12
+	// x et y sont les coordonï¿½es de l'image view. Or on veut qu'elle point au centre de celle ci
+	// x' et y' sont les coordonï¿½es de M' : x' = x+12
 	//								        y' = y+12				
 	//
 	
@@ -77,7 +77,6 @@ public class PlayGameMapping {
 		
 		
 		AnimationTimer game = new AnimationTimer() {
-
 			@Override
 			public void handle(long now) {
 				PacMan.setLayoutX(player.getXPos().get()-12);
@@ -103,13 +102,13 @@ public class PlayGameMapping {
 	 * ---------------------------------------------------
 	 */
 	
-	//Permé de fournir les entité : fantome et PacMan et de récupérer les murs
+	//Permï¿½ de fournir les entitï¿½ : fantome et PacMan et de rï¿½cupï¿½rer les murs
 	//NOTE : les fantomes seront a ajouter via cette fonction
 	public List<Wall> setEntityAndGetWall(PacMan player, Ghost Blinky) {
 		this.player = player; 
 		BlinkyEntity = Blinky;
 		
-		//Récupère les murs
+		//Rï¿½cupï¿½re les murs
 		Node a;
 		//On aparcoure les objets notre AnchorPan pricipale
 		for(int i =0; i<pan.getChildren().size(); i++) {
@@ -138,7 +137,7 @@ public class PlayGameMapping {
 	 * Listeneur pour mettre a jour l'afichage
 	 */
 	public void addListener() {
-		//On écoute la direction de PacMan et si elle change :
+		//On ï¿½coute la direction de PacMan et si elle change :
 		player.getDirection().addListener(new ChangeListener<Direction>(){
 			@Override
 			public void changed(ObservableValue<? extends Direction> arg0, Direction oldValue, Direction newValue) {
@@ -146,14 +145,14 @@ public class PlayGameMapping {
 				PacMan.setRotate(newValue.getRotate());				
 			}});
 		
-		//On écoute le nombre de vie restante a PacMan et si elle change
+		//On ï¿½coute le nombre de vie restante a PacMan et si elle change
 		player.getLife().addListener(new ChangeListener<Number>(){
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				//On met a jour l'affichage
 				
 			}});
-		//On écoute le nombre de point et si il change
+		//On ï¿½coute le nombre de point et si il change
 		player.getPoint().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {

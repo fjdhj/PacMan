@@ -102,6 +102,10 @@ public class MainClass extends Application {
 		}
 	}
 	
+	/**
+	 * Ouvre dans le navigateur
+	 * @param URI
+	 */
 	public void openInBrowser(String URI) {
 		services.showDocument(URI);
 	}
