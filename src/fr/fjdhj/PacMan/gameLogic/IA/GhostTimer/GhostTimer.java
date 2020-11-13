@@ -23,7 +23,7 @@ public class GhostTimer implements Runnable{
 	
 	private long pauseTime = 0l;
 	private long pauseStop = -1l;
-	private long time = 0l;
+	private long time = IA.TIME_WAVE_1[0];;
 	private long stop = -1l;
 	private int levelInWave = 0;
 	
@@ -53,7 +53,7 @@ public class GhostTimer implements Runnable{
 			public void run() {
 				MainClass.verbose("[Timer] Lancement pour : "+time);
 				do {
-					//On stock le temps de départ
+					//On stock le temps de dï¿½part
 					long start = System.currentTimeMillis();
 					try {Thread.sleep(time);} catch (InterruptedException e) {e.printStackTrace();}
 					
@@ -81,6 +81,7 @@ public class GhostTimer implements Runnable{
 				//On fini par lancer la tache
 				try {
 					blinky.getIA().changeMode();
+					blinky.getIA().checkPathFinding();
 				} catch (Exception e) {System.err.println("[ExecutionTacheTimer] Erreur dans la tache"); e.printStackTrace();}
 				System.out.println("[ExecutionTacheTimer] Execution finie");
 				//On relance le Thread controleur
@@ -116,7 +117,7 @@ public class GhostTimer implements Runnable{
 			
 			@Override
 			public void run() {
-				while(time != -1l) {
+				while(time != -1) {
 					pauseTimerLock.lock();			
 					//Si on appel pause(), alors qu'un timer est en cour il faut bloquer le tread
 					if(inPause)
@@ -195,7 +196,7 @@ public class GhostTimer implements Runnable{
 	}
 	
 	/**
-	 * C'est le controleur du timer, il le relanceras tant que nécessaire 
+	 * C'est le controleur du timer, il le relanceras tant que nï¿½cessaire 
 	 */
 	@Override
 	public void run() {
@@ -204,11 +205,10 @@ public class GhostTimer implements Runnable{
 		//C'est a dire tant que l'utilisation du timer est utile donc tant que les fantomes peuvent changer de mode
 		while (time != -1) {
 			//On choisie la nouvelle valeur du temps et on lance le timer
-			time = IA.TIME_WAVE_1[levelInWave];
 			this.timer();
 			
 			levelInWave++; //Il faut passer au niveau suivant pour la prochain timer
-			
+			time = IA.TIME_WAVE_1[levelInWave];
 			
 		}
 	}

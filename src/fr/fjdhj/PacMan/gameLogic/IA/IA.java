@@ -20,6 +20,9 @@ public class IA {
 	protected IAmod storMod;
 	protected ObjectProperty<IAmod> mod = new SimpleObjectProperty<>(IAmod.SCATTER);
 	
+	protected final int CASEX = 0;
+	protected final int CASEY = 0;
+	
 	/*
 	 * Apres avoir perdu une vie, ou apres avoir commencer un niveau, les IA sont en mode SCATTER
 	 * Les temps sont en milliseconde
@@ -251,6 +254,8 @@ public class IA {
 	
 	public void mainIA() {}
 	
+	public int[] getCoordDestination() {return null;}
+	
 	/**
 	 * Change de mode l'IA selon le mode actuelle
 	 * @throws Exception si IAmod a pour valeur FRIGHTNED
@@ -299,7 +304,16 @@ public class IA {
 		return ((int)(ghost.getXPos().get()/14) == (int) (player.getXPos().get()/14) && (int) (ghost.getYPos().get()/14) == (int) (player.getYPos().get()/14)); 
 	}
 	
-	
+	/**
+	 * A executer après avoir changer de mod notament, vérifie si il est interessant de forcer l'appel de regular path finding
+	 */
+	public void checkPathFinding() {
+		int[] dest = getCoordDestination();
+		Direction res = regularPathFiding(matrice, dest[0], dest[1], (int)(ghost.getXPos().get()/14), (int)(ghost.getYPos().get()/14), ghost.getDirection().get());
+		if(res != ghost.getDirection().get()) {
+			ghost.getNewDirection().set(res);
+		}
+	}
 	/* ------------------------------------------------
 	 * GETTEUR/SETTEUR/TRANSFER
 	 * ------------------------------------------------

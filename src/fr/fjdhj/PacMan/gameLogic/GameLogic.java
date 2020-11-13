@@ -123,7 +123,7 @@ public class GameLogic extends Thread{
 						 }else if((int)(gameCore.getBlinky().getXPos().get()-gameCore.getBlinky().getDirection().get().getModifier())/14 != (int)gameCore.getBlinky().getXPos().get()/14
 						|| (int)(gameCore.getBlinky().getYPos().get()-gameCore.getBlinky().getDirection().get().getModifier())/14 != (int)gameCore.getBlinky().getYPos().get()/14)
 						//Si lorsque j'avance d'un pixel, je me retrouve dans une nouvelle tuile, alors j'appel mainIA de IABlinky
-							 
+							 //System.out.println("DIRECTION : " + gameCore.getBlinky().getDirection().get());
 							 gameCore.getBlinky().getIA().mainIA();
 					 }
 				}
