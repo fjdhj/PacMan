@@ -68,7 +68,12 @@ public class GameLogic extends Thread{
 								//On v�rifie si ce n'est pas un super pac gome (gros points)
 								if(gameCore.controlleur.getPointCoords().get(i).getRadius()==4) {
 									//PacMan peut manger des phantomes
-										 
+									
+									Platform.runLater(new Runnable() {
+										@Override
+										public void run() {
+											gameCore.getPlayer().addPoint(50);
+										}});
 									//On attends 3/60 de seconde
 									try { Thread.sleep(300/6); } catch (InterruptedException e) { e.printStackTrace(); }
 											  
@@ -77,7 +82,7 @@ public class GameLogic extends Thread{
 									Platform.runLater(new Runnable() {
 									@Override
 									public void run() {
-										gameCore.getPlayer().addPoint(100);
+										gameCore.getPlayer().addPoint(10);
 									}});
 									//On attends 1/60 de seconde
 									try { Thread.sleep(100/6); } catch (InterruptedException e) { e.printStackTrace(); }
