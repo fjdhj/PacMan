@@ -20,7 +20,7 @@ public class BlinkyIA extends IA{
 	@Override
 	public void mainIA() {
 		
-		//On récupère coordonée de Blinky et on convertie en coordonée tuile
+		//On rï¿½cupï¿½re coordonï¿½e de Blinky et on convertie en coordonï¿½e tuile
 		int x = (int) (ghost.getXPos().get()/14);	
 		int y = (int) (ghost.getYPos().get()/14);
 		
@@ -29,7 +29,7 @@ public class BlinkyIA extends IA{
 		
 		//Si on poursuit PacMan
 		if(mod.get().equals(IAmod.CHASE) || mod.get().equals(IAmod.ELROY1) || mod.get().equals(IAmod.ELROY2)) {
-			//On récupère coordonée de PacMan et on convertie en coordonée tuile
+			//On rï¿½cupï¿½re coordonï¿½e de PacMan et on convertie en coordonï¿½e tuile
 			destx = (int) (player.getXPos().get()/14);	
 			desty = (int) (player.getYPos().get()/14);
 			
@@ -39,9 +39,9 @@ public class BlinkyIA extends IA{
 			desty = CASEY;
 		}
 		
-		//On appel notre fonction afin de récupérer les coordonées
+		//On appel notre fonction afin de rï¿½cupï¿½rer une direction
 		Direction dir = regularPathFiding(matrice, destx, desty, x, y, ghost.getDirection().get());
-		//Si on récupère pas rien, on le mets a jour dans la variable newDirection (et pas direction pour pas tout bug)
+		//Si on rï¿½cupï¿½re pas rien, on le mets a jour dans la variable newDirection (et pas direction pour pas tout bug)
 		if(dir != null) {
 			ghost.setNewDirection(dir);
 		}

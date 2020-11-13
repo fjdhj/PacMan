@@ -105,11 +105,8 @@ public class GameLogic extends Thread{
 				while(run) {
 					//Vitesse du jeu on suppose V = un chaque
 					try {
-						Thread.sleep(10);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+						Thread.sleep(9);
+					} catch (InterruptedException e) { e.printStackTrace(); }
 					
 					if(gameCore.getBlinky().getNewDirection().get()!=null) {
 						gameCore.getBlinky().canTurn(wall);
@@ -118,9 +115,15 @@ public class GameLogic extends Thread{
 					 //Si blinky ne va dans le mur
 					 if(!gameCore.getBlinky().goInWall(wall)) {
 						 gameCore.getBlinky().moove();
-						 if((int)(gameCore.getBlinky().getXPos().get()-gameCore.getBlinky().getDirection().get().getModifier())/14 != (int)gameCore.getBlinky().getXPos().get()/14
-							|| (int)(gameCore.getBlinky().getYPos().get()-gameCore.getBlinky().getDirection().get().getModifier())/14 != (int)gameCore.getBlinky().getYPos().get()/14)
-						 
+						 //On regarde si fantome mange PacMan
+						 if(gameCore.getBlinky().getIA().isOnPacMan()) {
+							 //On met fin au jeu
+							 System.out.println("PacMan manger !");
+							 
+						 }else if((int)(gameCore.getBlinky().getXPos().get()-gameCore.getBlinky().getDirection().get().getModifier())/14 != (int)gameCore.getBlinky().getXPos().get()/14
+						|| (int)(gameCore.getBlinky().getYPos().get()-gameCore.getBlinky().getDirection().get().getModifier())/14 != (int)gameCore.getBlinky().getYPos().get()/14)
+						//Si lorsque j'avance d'un pixel, je me retrouve dans une nouvelle tuile, alors j'appel mainIA de IABlinky
+							 
 							 gameCore.getBlinky().getIA().mainIA();
 					 }
 				}

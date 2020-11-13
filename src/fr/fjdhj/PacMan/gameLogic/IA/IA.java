@@ -91,17 +91,7 @@ public class IA {
 		//On revoie la liste
 		return result;
 	}
-	
-	/*public boolean isOnPacMan() {
-		System.out.println("IA X : " + simX + "; Y : " + simY);
-		System.out.println("PacMan X : " + player.getXPos().get() + "; Y : " + player.getYPos().get());
-		if(player.getXPos().get() == simX && player.getYPos().get() == simY) {
-			return true;
-		}
-		
-		
-		return false;
-	}*/
+
 	
 	/**
 	 * 
@@ -203,7 +193,7 @@ public class IA {
 			x+=direction.getModifier();
 		else
 			y+=direction.getModifier();
-		//On récupère les directions possible (demi tour exclue)
+		//On rï¿½cupï¿½re les directions possible (demi tour exclue)
 		List<Direction> result = isAnIntersect(matrice, x, y, direction);
 		if(result.size()!=0  && (destx != x || desty != y) && ghost.getNewDirection().get() == null) {
 			//Si on a qu'un seul direction on la prend
@@ -211,7 +201,7 @@ public class IA {
 				return result.get(0);
 			double[] dist = new double[4];
 			System.out.println("-----------------------------\n"+result.size());
-			//On parcour notre résultat
+			//On parcour notre rï¿½sultat
 			for(Direction dir : result) {
 				//Si c'est horizontale
 				//Distance = x a tester**2 + y a tester**2 
@@ -300,6 +290,16 @@ public class IA {
 		}
 	}
 
+	/**
+	 * Regarde si le fantome se trouve sur PacMan
+	 * @return <b>true</b> si c'est le cas, sinan renvoie <b>false</b>
+	 */
+	public boolean isOnPacMan() {
+		//Attention, ici c'est bien la tuile et non pas la case sur la qu'elle il est !
+		return ((int)(ghost.getXPos().get()/14) == (int) (player.getXPos().get()/14) && (int) (ghost.getYPos().get()/14) == (int) (player.getYPos().get()/14)); 
+	}
+	
+	
 	/* ------------------------------------------------
 	 * GETTEUR/SETTEUR/TRANSFER
 	 * ------------------------------------------------
