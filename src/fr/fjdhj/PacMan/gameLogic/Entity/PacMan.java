@@ -11,6 +11,7 @@ public class PacMan extends Entity{
 
 
 	private IntegerProperty life = new SimpleIntegerProperty();    //<----> int
+	private IntegerProperty pointMult = new SimpleIntegerProperty();    //<----> int, permet de savoir ou on en est entre point et vie
 	private DoubleProperty point = new SimpleDoubleProperty();     //<----> double
 
 	
@@ -22,8 +23,8 @@ public class PacMan extends Entity{
 	/**
 	 * Constructeur par default
 	 * 
-	 * @param xPos Les coordonées x du PacMan
-	 * @param yPos Les coordonées y du PacMan
+	 * @param xPos Les coordonï¿½es x du PacMan
+	 * @param yPos Les coordonï¿½es y du PacMan
 	 * @param life Le nombre de vie restante
 	 * @param point Le nombre de point obtenu
 	 * @param direction : la direction
@@ -50,14 +51,14 @@ public class PacMan extends Entity{
 
 	
 	/*--------------------------------------------------------------------------------
-	 * Fonction suplémentaire
+	 * Fonction suplï¿½mentaire
 	 *--------------------------------------------------------------------------------
 	 */
 	
 	/**
 	 * Ajoute une/des vie(s) a PacMan si nbr>0
 	 * Retire une/des vie(s) a PacMan si nbr<0
-	 * @param nbr : quantité à ajouter/retirer
+	 * @param nbr : quantitï¿½ ï¿½ ajouter/retirer
 	 */
 	public void addLife(int nbr) {
 		life.set(life.get()+nbr);
@@ -66,7 +67,7 @@ public class PacMan extends Entity{
 	/**
 	 * Ajoute des points a PacMan
 	 * NOTE: Si nbr<0 alors permet d'en retirer
-	 * @param nbr : Nombre de point à ajouter
+	 * @param nbr : Nombre de point ï¿½ ajouter
 	 */
 	public void addPoint(int nbr) {
 		point.set(point.get() +nbr);
@@ -122,6 +123,22 @@ public class PacMan extends Entity{
 	 */
 	public void setLife(int life) {
 		this.life.set(life);;
+	}
+
+	public IntegerProperty getPointMult() {
+		return pointMult;
+	}
+
+	public int getPointMultValue() {
+		return pointMult.get();
+	}
+	
+	public void setPointMult(IntegerProperty pointMult) {
+		this.pointMult = pointMult;
 	}	
+	
+	public void addPointMult(int n) {
+		pointMult.set(pointMult.get()+n);
+	}
 
 }

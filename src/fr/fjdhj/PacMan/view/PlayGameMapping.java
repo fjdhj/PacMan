@@ -18,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -57,6 +58,8 @@ public class PlayGameMapping {
 	public AnchorPane pan;
 	@FXML
 	private AnchorPane pointPane;
+	@FXML
+	private FlowPane lifePan;
 	@FXML
 	private Label point;
 	
@@ -150,6 +153,18 @@ public class PlayGameMapping {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				//On met a jour l'affichage
+				if((int) newValue > (int) oldValue) {
+					for(int i = 0; (int)oldValue+i < (int)newValue; i++) {
+						ImageView img = new ImageView(new Image(PlayGameMapping.class.getResourceAsStream("ressource/PacMan.png")));
+						img.setFitWidth(15);
+						img.setFitHeight(15);
+						lifePan.getChildren().add(img);
+					}
+				}else {
+					for(int i = 0; (int)newValue+i < (int)oldValue; i++) {
+						lifePan.getChildren().remove(lifePan.getChildren().size()-1);
+					}
+				}
 				
 			}});
 		//On �coute le nombre de point et si il change
@@ -158,6 +173,12 @@ public class PlayGameMapping {
 			public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
 				//On met a jour l'affichage
 				point.setText(arg2.toString());
+				
+				//On ajoute une vie si on est a 10 000 pts
+				if(player.getPointMultValue()+1 <= player.getPoint().get()) {
+					player.addLife(1);
+					player.addPointMult(1);
+				}
 			}
 			
 		});	
