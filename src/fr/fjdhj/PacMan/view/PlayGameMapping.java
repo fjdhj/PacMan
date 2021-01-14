@@ -3,6 +3,7 @@ package fr.fjdhj.PacMan.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.fjdhj.PacMan.MainClass;
 import fr.fjdhj.PacMan.gameLogic.Direction;
 import fr.fjdhj.PacMan.gameLogic.Wall;
 import fr.fjdhj.PacMan.gameLogic.Entity.Ghost;
@@ -22,6 +23,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Scale;
 
 public class PlayGameMapping {
 	
@@ -87,6 +89,15 @@ public class PlayGameMapping {
 				
 				Blinky.setLayoutX(BlinkyEntity.getXPos().get()-12);
 				Blinky.setLayoutY(BlinkyEntity.getYPos().get()-12);
+				
+				double coef = Math.min(MainClass.getFenWidth() / pan.getPrefWidth(), MainClass.getFenHeight() / pan.getPrefHeight());
+				Scale scale = new Scale();
+				scale.setPivotX(0); 
+				scale.setPivotY(0);
+				scale.setX(coef); 
+				scale.setY(coef);
+				pan.getTransforms().clear(); 
+				pan.getTransforms().add(scale);
 			}
 			
 			

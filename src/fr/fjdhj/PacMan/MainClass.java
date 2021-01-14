@@ -6,6 +6,8 @@ import java.net.URL;
 import fr.fjdhj.PacMan.view.CreditMapping;
 import javafx.application.Application;
 import javafx.application.HostServices;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -14,6 +16,7 @@ import javafx.stage.Stage;
 
 public class MainClass extends Application {
 	
+	private static Scene scene;
 	private static Stage stagePrincipal;
 	private static AnchorPane conteneurPrincipal;
 	private final HostServices services = this.getHostServices();
@@ -60,7 +63,7 @@ public class MainClass extends Application {
 		try {
 			conteneurPrincipal = (AnchorPane) loader.load();
 			//Cr�ation scene principale
-			Scene scene = new Scene(conteneurPrincipal);
+			scene = new Scene(conteneurPrincipal);
 			//Ajout de la scene dans le stage
 			stagePrincipal.setScene(scene);
 			//Mets le stage au centre
@@ -100,6 +103,14 @@ public class MainClass extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static double getFenWidth() {
+		return scene.getWidth();
+	}
+	
+	public static double getFenHeight() {
+		return scene.getHeight();
 	}
 	
 	/**
